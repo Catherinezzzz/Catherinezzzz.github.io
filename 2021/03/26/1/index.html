@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Orla(CYY)">
+    
+    <title>
+        
+            前端——React组件与生命周期 |
+        
+        Orla的随笔小记
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"www.cyystudying.top","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/profile.jpg","favicon":"/images/logo.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Orla的随笔小记
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">前端——React组件与生命周期</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/profile.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Orla(CYY)</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-03-26 17:12:34
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/React/">React</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>22 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="React组件与声明周期"><a href="#React组件与声明周期" class="headerlink" title="React组件与声明周期"></a>React组件与声明周期</h1><p>本节代码在<a href="http://www.cyystudying.top/2021/03/25/%E5%89%8D%E7%AB%AF-React%E5%9F%BA%E7%A1%80/">前端——React基础</a>基础上进行修改</p>
+<h2 id="组件拆分与组件之间的传值"><a href="#组件拆分与组件之间的传值" class="headerlink" title="组件拆分与组件之间的传值"></a>组件拆分与组件之间的传值</h2><p>·为什么要拆分组件：提高可维护性</p>
+<h3 id="实践：将list中的item拆分出去，变成更小的组件"><a href="#实践：将list中的item拆分出去，变成更小的组件" class="headerlink" title="实践：将list中的item拆分出去，变成更小的组件"></a>实践：将list中的item拆分出去，变成更小的组件</h3><p><img src="https://i.loli.net/2021/03/26/QgcauyLi4fIxo1D.png" alt="react组件拆分.png"></p>
+<p>当前<code>getListItems()</code>方法返回的是&lt;li&gt;标签，我们现在要做的是把返回的内容拆分为一个更小的组件。</p>
+<p>只需要将其中的代码重新写到TodoItem.js中，然后在TodoList.js中引入这个组件，以标签的形式使用这个组件即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoItem组件 TodoItem.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>this is an item<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoItem;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>但是我们需要让TodoItem这个组件获取到我们要渲染的数据。此时我们需要找到TodoItem的<strong>父级组件</strong>，让这个父级组件告诉TodoItem，需要渲染的是什么内容。</p>
+<p>此时，需要使用<strong>属性</strong>的形式，来告诉子组件需要展示什么内容。</p>
+<p>在父组件引用的子组件标签中，可以任意命名一个属性，通过这个属性的值来给子组件传递一些内容。</p>
+<p>子组件需要使用<code>this.props.属性名</code>来接收父组件传递过来的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">getListItems</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.state.list.map(<span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 此处属性名为content，向子组件TodoItem传递value这个值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">TodoItem</span> <span class="attr">content</span>=<span class="string">&#123;value&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">TodoItem</span>&gt;</span></span>;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoItem组件 TodoItem.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 使用this.props接收父组件传递过来的内容，属性名为content</span></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;this.props.content&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoItem;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>小结</strong>：</p>
+<p>父子组件的概念：在一个组件中引用了另一个组件，这两个组件就构成了父子关系。</p>
+<p>父组件通过属性的形式向子组件传值。</p>
+<p>子组件通过<code>this.props</code>的属性，从父组件接收传递过来的值。</p>
+<p>现在继续来拆分。</p>
+<p>拆分出上面的TodoItem组件后，产生了一个问题。我们现在点击列表项无法删除这个列表项了。因为此时组件内的&lt;li&gt;标签上并没有绑定onClick事件。</p>
+<p>此时要注意，我们<strong>不能往子组件标签上绑定onClick事件</strong>，也就是不能往&lt;TodoItem&gt;标签上绑定事件。我们需要做的是进入到子组件里面，对里面的&lt;li&gt;标签进行事件绑定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleItemClick.bind(this)&#125;</span>&gt;</span>&#123;this.props.content&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>新的问题又来了。我们要调用的<code>handleItemClick()</code>方法，需要修改的是父组件中的<code>this.state.list</code>的数据。</p>
+<p><strong>React中父组件除了可以以属性的形式向子组件传递数据，还可以以属性的形式向子组件传递方法。</strong></p>
+<p>此时我们把父组件中的<code>handleItemClick()</code>方法传递给子组件。<code>delFunction=&#123;this.handleItemClick&#125;</code>代表在创建TodoItem子组件时，将<code>handleItemClick</code>方法一同传递给子组件。子组件要做的就是调用这个传递过来的<code>delFunction</code>方法。</p>
+<p>子组件调用父组件传递过来的方法，同样使用<code>this.props</code>进行调用。使用<code>this.props.delFunction()</code>即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoList.js</span></span><br><span class="line"><span class="comment">// 为子组件添加传递的方法delFunction</span></span><br><span class="line">  <span class="function"><span class="title">getListItems</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state.list.map(<span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        &lt;TodoItem</span><br><span class="line">          content=&#123;value&#125;</span><br><span class="line">          key=&#123;index&#125;</span><br><span class="line">          delFunction=&#123;<span class="built_in">this</span>.handleItemClick&#125;</span><br><span class="line">        &gt;&lt;/TodoItem&gt;</span><br><span class="line">      );</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoItem组件 TodoItem.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleItemClick = <span class="built_in">this</span>.handleItemClick.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">handleItemClick</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 改变父组件中的list数据</span></span><br><span class="line">    <span class="built_in">this</span>.props.delFunction();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleItemClick&#125;</span>&gt;</span>&#123;this.props.content&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoItem;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果只是这样写，会报错。因为此时调用的delFunction中，需要修改的是<code>this.state.list</code>的数据，而在子组件中执行，this指向的是当前类的实例，在当前组件中并不存在<code>state.list</code>，所以会报错。</p>
+<p>为了解决这个问题，我们需要在父组件中绑定this为父组件实例，添加<code>this.handleItemClick = this.handleItemClick.bind(this);</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoList的构造函数</span></span><br><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">  <span class="built_in">super</span>(props);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">this</span>.handleInputChange = <span class="built_in">this</span>.handleInputChange.bind(<span class="built_in">this</span>);</span><br><span class="line">  <span class="built_in">this</span>.handleKeyUp = <span class="built_in">this</span>.handleKeyUp.bind(<span class="built_in">this</span>);</span><br><span class="line">  <span class="built_in">this</span>.handleItemClick = <span class="built_in">this</span>.handleItemClick.bind(<span class="built_in">this</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">this</span>.state = &#123;</span><br><span class="line">    inputValue: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    list: [],</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>但是，删除某一列表项需要获取到该项的<code>index</code>值，我们之前定义的<code>handleItemClick()</code>方法中也确实传入了一个index参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 之前定义的handleItemClick</span></span><br><span class="line">  <span class="function"><span class="title">handleItemClick</span>(<span class="params">index</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> list = [...this.state.list];</span><br><span class="line">    list.splice(index, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      list,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以在子组件中，需要获取到每项的index值。我们在父组件中遍历数组并且创建TodoItem组件的时候，就可以通过属性的方式把<code>index</code>传递给子组件。（<code>index=&#123;index&#125;</code>）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoList.js</span></span><br><span class="line">  <span class="function"><span class="title">getListItems</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.state.list.map(<span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//   return (</span></span><br><span class="line">    <span class="comment">//     &lt;li key=&#123;index&#125; onClick=&#123;this.handleItemClick.bind(this, index)&#125;&gt;</span></span><br><span class="line">    <span class="comment">//       &#123;value&#125;</span></span><br><span class="line">    <span class="comment">//     &lt;/li&gt;</span></span><br><span class="line">    <span class="comment">//   );</span></span><br><span class="line">    <span class="comment">// 此处属性名为content，向子组件TodoItem传递value这个值</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;TodoItem</span><br><span class="line">        content=&#123;value&#125;</span><br><span class="line">        key=&#123;index&#125;</span><br><span class="line">        index=&#123;index&#125;</span><br><span class="line">        delFunction=&#123;<span class="built_in">this</span>.handleItemClick&#125;</span><br><span class="line">      &gt;&lt;/TodoItem&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>子组件通过<code>this.props.index</code>就可以获取到index属性值了~</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoItem组件 TodoItem.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleItemClick = <span class="built_in">this</span>.handleItemClick.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">handleItemClick</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 改变父组件中的list数据，获取到父组件传递的index值</span></span><br><span class="line">    <span class="built_in">this</span>.props.delFunction(<span class="built_in">this</span>.props.index);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleItemClick&#125;</span>&gt;</span>&#123;this.props.content&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoItem;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>★★★小结</strong>：</p>
+<p><strong>父组件通过属性形式和子组件进行通信，可以传递值/方法；</strong></p>
+<p><strong>子组件和父组件进行通信，需要调用父组件传递过来的方法。；</strong></p>
+<p><strong>子组件调用父组件的方法时，要在父组件传递方法的过程中，变更方法的作用域，this绑定在父组件中，否则传递到子组件后，this的指向会出现问题。</strong></p>
+<h3 id="拆分组件后的完整代码"><a href="#拆分组件后的完整代码" class="headerlink" title="拆分组件后的完整代码"></a>拆分组件后的完整代码</h3><p>目录结构如下图所示：</p>
+<p><img src="https://i.loli.net/2021/03/26/sWVmezkqouXMQw4.png" alt="React拆分组件后目录结构.png"></p>
+<p>public/index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">href</span>=<span class="string">&quot;%PUBLIC_URL%/favicon.ico&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Orla React<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">noscript</span>&gt;</span>You need to enable JavaScript to run this app.<span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>src/index.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDom <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入组件</span></span><br><span class="line"><span class="keyword">import</span> TodoList <span class="keyword">from</span> <span class="string">&quot;./TodoList&quot;</span>;</span><br><span class="line"></span><br><span class="line">ReactDom.render(<span class="xml"><span class="tag">&lt;<span class="name">TodoList</span>&gt;</span><span class="tag">&lt;/<span class="name">TodoList</span>&gt;</span></span>, <span class="built_in">document</span>.getElementById(<span class="string">&quot;root&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>src/TodoList.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoList组件，组件开头字母大写</span></span><br><span class="line"><span class="comment">// 引入Fragment组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> TodoItem <span class="keyword">from</span> <span class="string">&quot;./TodoItem&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 定义组件中的数据</span></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 接收参数props，传递给基类(Component)的构造函数</span></span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.handleInputChange = <span class="built_in">this</span>.handleInputChange.bind(<span class="built_in">this</span>);</span><br><span class="line">    <span class="built_in">this</span>.handleKeyUp = <span class="built_in">this</span>.handleKeyUp.bind(<span class="built_in">this</span>);</span><br><span class="line">    <span class="built_in">this</span>.handleItemClick = <span class="built_in">this</span>.handleItemClick.bind(<span class="built_in">this</span>);</span><br><span class="line">    <span class="comment">// React中，定义组件的数据要放在this.state中</span></span><br><span class="line">    <span class="comment">// inputValue定义input输入框中的数据</span></span><br><span class="line">    <span class="comment">// list定义ul列表中的数据</span></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      inputValue: <span class="string">&quot;&quot;</span>,</span><br><span class="line">      list: [],</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleInputChange</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 这个函数的this默认是undefined</span></span><br><span class="line">    <span class="comment">// 想要让this指向这个组件，需要在render函数中调用此方法时使用bind(this)</span></span><br><span class="line">    <span class="comment">// console.log(e.target.value);</span></span><br><span class="line">    <span class="comment">// 数据不能直接改变</span></span><br><span class="line">    <span class="comment">// this.state.inputValue = e.target.value;</span></span><br><span class="line">    <span class="comment">// 要使用setState方法来改变组件中的数据</span></span><br><span class="line">    <span class="comment">// console.log(this);</span></span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      inputValue: e.target.value,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleKeyUp</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 回车键的键盘码是13，按下回车代表输入完毕，添加列表项</span></span><br><span class="line">    <span class="comment">// 由于函数handleInputChange,this.state.inputValue的值会随着输入框中内容的改变动态改变</span></span><br><span class="line">    <span class="comment">// 获取this.state.inputValue就是获取输入框当前内容</span></span><br><span class="line">    <span class="comment">// 添加后自动清空输入框</span></span><br><span class="line">    <span class="keyword">if</span> (e.keyCode === <span class="number">13</span> &amp;&amp; e.target.value.trim() !== <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> list = [...this.state.list, <span class="built_in">this</span>.state.inputValue.trim()];</span><br><span class="line">      <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">        list: list,</span><br><span class="line">        inputValue: <span class="string">&quot;&quot;</span>,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleItemClick</span>(<span class="params">index</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> list = [...this.state.list];</span><br><span class="line">    list.splice(index, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      list,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getListItems</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state.list.map(<span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">//   return (</span></span><br><span class="line">      <span class="comment">//     &lt;li key=&#123;index&#125; onClick=&#123;this.handleItemClick.bind(this, index)&#125;&gt;</span></span><br><span class="line">      <span class="comment">//       &#123;value&#125;</span></span><br><span class="line">      <span class="comment">//     &lt;/li&gt;</span></span><br><span class="line">      <span class="comment">//   );</span></span><br><span class="line">      <span class="comment">// 此处属性名为content，向子组件TodoItem传递value这个值</span></span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        &lt;TodoItem</span><br><span class="line">          content=&#123;value&#125;</span><br><span class="line">          key=&#123;index&#125;</span><br><span class="line">          index=&#123;index&#125;</span><br><span class="line">          delFunction=&#123;<span class="built_in">this</span>.handleItemClick&#125;</span><br><span class="line">        &gt;&lt;/TodoItem&gt;</span><br><span class="line">      );</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// render一次只能渲染一个外部标签，想渲染多个，需要将标签放在一个div中。</span></span><br><span class="line">    <span class="comment">// 但是这样的做法会导致dom中多出来一个div</span></span><br><span class="line">    <span class="comment">// React16中提供了占位符组件Fragment</span></span><br><span class="line">    <span class="comment">// 将所有组件放在Fragment中，不会在dom中添加其他的元素</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &#123;<span class="comment">/* 使用花括号将数据包裹起来 */</span>&#125;</span><br><span class="line">        &lt;input</span><br><span class="line">          value=&#123;<span class="built_in">this</span>.state.inputValue&#125;</span><br><span class="line">          onChange=&#123;<span class="built_in">this</span>.handleInputChange&#125;</span><br><span class="line">          onKeyUp=&#123;<span class="built_in">this</span>.handleKeyUp&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;ul&gt;&#123;<span class="built_in">this</span>.getListItems()&#125;&lt;/ul&gt;</span><br><span class="line">      &lt;/Fragment&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoList;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>src/TodoItem.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoItem组件 TodoItem.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleItemClick = <span class="built_in">this</span>.handleItemClick.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">handleItemClick</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 改变父组件中的list数据，获取到父组件传递的index值</span></span><br><span class="line">    <span class="comment">// ES6解构赋值，简化写法。和this.props.delFunction(this.props.index);等价</span></span><br><span class="line">    <span class="keyword">const</span> &#123; delFunction, index &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    delFunction(index);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 使用this.props接收父组件传递过来的内容，属性名为content</span></span><br><span class="line">    <span class="comment">// ES6解构赋值简化写法</span></span><br><span class="line">    <span class="comment">// const &#123; content &#125; = this.props;</span></span><br><span class="line">    <span class="comment">// return &lt;li&gt;&#123;content&#125;&lt;/li&gt;;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleItemClick&#125;</span>&gt;</span>&#123;this.props.content&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoItem;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="React生命周期"><a href="#React生命周期" class="headerlink" title="React生命周期"></a>React生命周期</h2><h3 id="React核心特性总结"><a href="#React核心特性总结" class="headerlink" title="React核心特性总结"></a>React核心特性总结</h3><p>React采用的是声明式开发模式，不需要我们对DOM进行任何操作，只需要定义好JSX模板和数据，数据发生变化时，页面DOM会自动发生变化。从上述TodoList的开发中可见一斑。</p>
+<p>React可以和其他框架并存。有一套解耦的机制。</p>
+<p>组件化。不用多说了吧，都是组件。</p>
+<p>单向数据流。父组件可以改变子组件的数据，但是子组件一定不能直接改变父组件的数据。</p>
+<p>函数式编程。每个组件都由很多函数构成，方便自动化测试。</p>
+<h3 id="props-state与render函数"><a href="#props-state与render函数" class="headerlink" title="props, state与render函数"></a>props, state与render函数</h3><p>props: 属性。父组件通过属性向子组件传递参数。</p>
+<p>state: 组件中的数据。</p>
+<p>render函数: 用来渲染组件中的内容。</p>
+<p>这三者之间存在一定的联系：</p>
+<p>当组件初次创建的时候，render函数会被执行一次。</p>
+<p>当state数据发生变更的时候，render函数会被重新执行。</p>
+<p>当props数据发生变更的时候，接收props的子组件的render函数会被重新执行。</p>
+<p>用代码来举例：</p>
+<p>依然是创建一个React项目。页面上显示一个button和一个数字，每当我们点击这个button，数字就会+1。</p>
+<p><img src="https://i.loli.net/2021/03/26/nAmhYStrvfl2bK9.gif" alt="React点击_1.gif"></p>
+<p>public/index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">href</span>=<span class="string">&quot;%PUBLIC_URL%/favicon.ico&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>props-state-render<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">noscript</span>&gt;</span>You need to enable JavaScript to run this app.<span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>src/counter.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleClick = <span class="built_in">this</span>.handleClick.bind(<span class="built_in">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      number: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> newNumber = <span class="built_in">this</span>.state.number + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      number: newNumber,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;counter render&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.handleClick&#125;&gt;点击+<span class="number">1</span>&lt;/button&gt;</span><br><span class="line">        &lt;div&gt;&#123;<span class="built_in">this</span>.state.number&#125;&lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Counter;</span><br></pre></td></tr></table></figure>
+
+<p>在这个组件中，每次调用render函数就会在控制台打印”counter render”。</p>
+<p>来看效果：</p>
+<p><img src="https://i.loli.net/2021/03/26/TAbNyBRXcYrdeFl.gif" alt="React-state改变render函数执行.gif"></p>
+<p>从这里可以看出，当组件初次创建的时候，render函数会被执行一次。当state数据发生变更的时候，render函数会被重新执行。</p>
+<p>那么当props改变时，render函数又会如何执行？</p>
+<p>要用props，需要创建一个子组件，并在父组件中引用它。在子组件的render函数中打印”props change”。</p>
+<p>src/child.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件child.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// props数据发生改变，子组件的render函数就会重新执行</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;props change&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;this.props.number&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Child;</span><br></pre></td></tr></table></figure>
+
+<p>src/counter.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件counter.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Child <span class="keyword">from</span> <span class="string">&quot;./child&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleClick = <span class="built_in">this</span>.handleClick.bind(<span class="built_in">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      number: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> newNumber = <span class="built_in">this</span>.state.number + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      number: newNumber,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.handleClick&#125;&gt;点击+<span class="number">1</span>&lt;/button&gt;</span><br><span class="line">        &lt;Child number=&#123;<span class="built_in">this</span>.state.number&#125;&gt;&lt;/Child&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Counter;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>实现效果：</p>
+<p><img src="https://i.loli.net/2021/03/26/DFbk6ZzBJOURhNY.gif" alt="props改变子组件render重新执行.gif"></p>
+<p>当初次使用子组件时，子组件的render函数会被执行一次。每当props中的数据发生改变时，接收props的子组件的render也会重新执行。</p>
+<h3 id="React中ref的使用"><a href="#React中ref的使用" class="headerlink" title="React中ref的使用"></a>React中ref的使用</h3><p>React是一个数据驱动的框架，我们想实现一个功能的时候，不要直接去操作DOM，而是直接操作数据，数据变化，页面就会随之改变。</p>
+<p>但是在某些特殊场景下，我们依然需要对React中某些组件的DOM做一些操作。在React中操作DOM，就需要使用ref。</p>
+<p>拿上一小节的counter组件举例。<strong>现在想实现这样一个功能：当我点击按钮时，我想知道这个按钮距离浏览器顶部的距离是多少。</strong></p>
+<p>思考一下，要想获取到button按钮距离浏览器顶部的距离，那我们就必须获取到button的这个DOM结点，React是数据驱动的，不直接操作DOM，无法帮我们计算距离这样的东西。所以这里需要通过原生的DOM计算来获取到这个距离。</p>
+<p>这时候，ref属性就派上用场了。</p>
+<p>我们可以找到JSX中对应的那个button按钮，在这个按钮上增加一个ref属性，这个属性一般等于一个函数，这个函数<strong>接收的参数就是button这个JSX标签真实对应的DOM</strong>。将这个参数赋值给当前组建的this之中。我们通过this就可以直接拿到这个DOM结点了。</p>
+<p>看代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// counter.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Child <span class="keyword">from</span> <span class="string">&quot;./child&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleClick = <span class="built_in">this</span>.handleClick.bind(<span class="built_in">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      number: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 获取button对应的DOM结点</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.buttonElem);</span><br><span class="line">    <span class="keyword">const</span> newNumber = <span class="built_in">this</span>.state.number + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      number: newNumber,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 给button添加ref属性</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button</span><br><span class="line">          onClick=&#123;<span class="built_in">this</span>.handleClick&#125;</span><br><span class="line">          ref=&#123;<span class="function">(<span class="params">button</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.buttonElem = button;</span><br><span class="line">          &#125;&#125;</span><br><span class="line">        &gt;</span><br><span class="line">          点击+<span class="number">1</span></span><br><span class="line">        &lt;/button&gt;</span><br><span class="line">        &lt;Child number=&#123;<span class="built_in">this</span>.state.number&#125;&gt;&lt;/Child&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Counter;</span><br></pre></td></tr></table></figure>
+
+<p>这样通过<code>this.buttonElem</code>我们就拿到了button这个JSX标签真实对应的DOM。</p>
+<p><img src="https://i.loli.net/2021/03/26/etbOGYlQZLUnMaw.gif" alt="react获取DOM结点.gif"></p>
+<p>获取到这个DOM结点之后，就可以调用原生属性了~  使用<code>this.buttonElem.clientTop</code>就可以获取到距离顶部的距离。</p>
+<p>现在我们知道了ref的作用：<strong>ref可以帮助我们获取JSX标签对应的原生DOM结点</strong></p>
+<p>现在有一个问题。我们把ref放到了标签上可以获取到对应的DOM结点。那如果把ref属性放到组件上呢？</p>
+<p>注意ref中的函数接收参数的名字要和标签相同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// counter.js</span></span><br><span class="line"><span class="comment">// 给Child组件添加ref属性</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> Child <span class="keyword">from</span> <span class="string">&quot;./child&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleClick = <span class="built_in">this</span>.handleClick.bind(<span class="built_in">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      number: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 获取button对应的DOM结点</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.childElem);</span><br><span class="line">    <span class="keyword">const</span> newNumber = <span class="built_in">this</span>.state.number + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      number: newNumber,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 给子组件Child添加ref属性</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.handleClick&#125;&gt;点击+<span class="number">1</span>&lt;/button&gt;</span><br><span class="line">        &lt;Child</span><br><span class="line">          number=&#123;<span class="built_in">this</span>.state.number&#125;</span><br><span class="line">          ref=&#123;<span class="function">(<span class="params">child</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.childElem = child;</span><br><span class="line">          &#125;&#125;</span><br><span class="line">        &gt;&lt;/Child&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Counter;</span><br></pre></td></tr></table></figure>
+
+<p>此时打印的是子组件对应的组件实例。</p>
+<p>![React子组件添加ref属性](C:\Users\Catherine\Desktop\blog pics\React子组件添加ref属性.png)</p>
+<p><strong>小结</strong>：</p>
+<p>ref写在JSX的标签上，获取的是对应的DOM结点；</p>
+<p>ref写在组件标签上，获取的是组件的js实例。</p>
+<h3 id="异步的setState"><a href="#异步的setState" class="headerlink" title="异步的setState"></a>异步的setState</h3><p>setState有一个很重要的特点：它的执行是<strong>异步</strong>的。</p>
+<p>举个例子。</p>
+<p>在计数器的基础上，修改代码，显示数字的地方使用div标签，使用ref获取到这个div对应的DOM元素，点击按钮使用<code>setState</code>修改其中的数据。然后在<code>setState</code>之前打印一次div的<code>innerHTML</code>，在<code>setState</code>之后再打印一次div的<code>innerHTML</code>。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// counter.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleClick = <span class="built_in">this</span>.handleClick.bind(<span class="built_in">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      number: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// setState之前获取div对应的DOM结点中的内容</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.divElem.innerHTML);</span><br><span class="line">    <span class="keyword">const</span> newNumber = <span class="built_in">this</span>.state.number + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      number: newNumber,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// setState之后获取div对应的DOM结点中的内容</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.divElem.innerHTML);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.handleClick&#125;&gt;点击+<span class="number">1</span>&lt;/button&gt;</span><br><span class="line">        &lt;div</span><br><span class="line">          ref=&#123;<span class="function">(<span class="params">div</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.divElem = div;</span><br><span class="line">          &#125;&#125;</span><br><span class="line">        &gt;</span><br><span class="line">          &#123;<span class="built_in">this</span>.state.number&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Counter;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>按理来说，<code>setState</code>之前，number的值并未被修改。初始number值为1，那么最开始应该输出1，调用<code>setState</code>之后，<code>number=number + 1</code>，再次输出number的值应该为2。</p>
+<p>运行一下看看。</p>
+<p><img src="https://i.loli.net/2021/03/26/cqMaJbw6gv3OR5A.gif" alt="React-setState异步1.gif"></p>
+<p>两次输出的结果居然一样。</p>
+<p>这里的原因就在于，**<code>setState</code>是异步执行的**。<code>setState</code>还没执行，后面的代码可能就先执行了。</p>
+<p>想解决这个问题，可以将setState换种写法。</p>
+<p>之前我们写setState，都是让其接收一个对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.setState(&#123;</span><br><span class="line">     number: newNumber,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>它也可以接收一个函数，在这个函数中return一个对象。这两种写法其实是等价的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.setState(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    number: newNumber,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这样写的好处是，我们可以在setState中写第二个参数，第二个参数也是一个函数，这个函数在setState将数据改变之后才会执行。</p>
+<p>修改代码如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleClick = <span class="built_in">this</span>.handleClick.bind(<span class="built_in">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      number: <span class="number">1</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.divElem.innerHTML);</span><br><span class="line">    <span class="keyword">const</span> newNumber = <span class="built_in">this</span>.state.number + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 这里修改setState的写法，并传入第二个参数</span></span><br><span class="line">    <span class="built_in">this</span>.setState(</span><br><span class="line">      () =&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          number: newNumber,</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;,</span><br><span class="line">      () =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.divElem.innerHTML);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.handleClick&#125;&gt;点击+<span class="number">1</span>&lt;/button&gt;</span><br><span class="line">        &lt;div</span><br><span class="line">          ref=&#123;<span class="function">(<span class="params">div</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.divElem = div;</span><br><span class="line">          &#125;&#125;</span><br><span class="line">        &gt;</span><br><span class="line">          &#123;<span class="built_in">this</span>.state.number&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Counter;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样，第二次输出的就是修改后的number值了。</p>
+<p><img src="https://i.loli.net/2021/03/26/zgq7LcieCshX9TQ.gif" alt="React-setState异步2.gif"></p>
+<h3 id="React组件的声明周期函数"><a href="#React组件的声明周期函数" class="headerlink" title="React组件的声明周期函数"></a>React组件的声明周期函数</h3><p>先下个定义：在React中，生命周期函数是组件在某一时刻会自动执行的函数。</p>
+<p>之前使用的<code>render()</code>函数就是一个生命周期函数，它在组建的数据发生变化时自动执行。</p>
+<p>首先来看一下，React组件在展示页面时会分为几个周期。每个周期会有一些生命周期函数自动执行。</p>
+<p><img src="https://i.loli.net/2021/03/26/CW3yY8KSF1naRUT.png" alt="React页面展示的周期.png"></p>
+<p>① Initialization：组件初始化阶段。设置一些props/state数据。没有用到生命周期函数。</p>
+<p>② Mounting：页面挂载阶段。将数据展示到HTML页面上。三个生命周期函数函数执行顺序：<code>componentWillMount()</code> –&gt; <code>render()</code> –&gt; <code>componentDidMount()</code>，即挂载前准备–&gt;挂载–&gt;挂载完成。只有在组件<strong>第一次渲染</strong>到页面中时，才会执行Mounting这一阶段。后续修改数据，页面重新渲染，Mounting也不会重新执行。</p>
+<p>③ Updation：数据更新阶段。组件中的数据发生变化，不会重新进行Mounting，而是执行Updation这一阶段。</p>
+<p>​    这一阶段的执行流程分为两类。一类是props发生变化时的执行流程；另一类是states发生变化时的执行流程。</p>
+<p>④ Unmounting：组件销毁阶段。当组件即将从页面中移除时，<code>componentWillUnmount()</code>会自动执行。</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/03/25/%E5%89%8D%E7%AB%AF-React%E5%9F%BA%E7%A1%80/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">前端——React基础</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="twikoo-container">
+        <script 
+                src="//cdn.jsdelivr.net/npm/twikoo@1.0.0/dist/twikoo.all.min.js"
+        ></script>
+        <div id="twikoo-comment"></div>
+        <script >
+            function loadTwikoo() {
+                twikoo.init({
+                    el: '#twikoo-comment',
+                    envId: 'orlablog-6gs7djo1819bd3c8',
+                    region: '',
+                });
+            }
+
+            if ('false') {
+                const loadTwikooTimeout = setTimeout(() => {
+                    loadTwikoo();
+                    clearTimeout(loadTwikooTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadTwikoo);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Orla(CYY)</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E7%BB%84%E4%BB%B6%E4%B8%8E%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F"><span class="nav-number">1.</span> <span class="nav-text">React组件与声明周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%8B%86%E5%88%86%E4%B8%8E%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BC%A0%E5%80%BC"><span class="nav-number">1.1.</span> <span class="nav-text">组件拆分与组件之间的传值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%B0%86list%E4%B8%AD%E7%9A%84item%E6%8B%86%E5%88%86%E5%87%BA%E5%8E%BB%EF%BC%8C%E5%8F%98%E6%88%90%E6%9B%B4%E5%B0%8F%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">实践：将list中的item拆分出去，变成更小的组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%86%E5%88%86%E7%BB%84%E4%BB%B6%E5%90%8E%E7%9A%84%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">拆分组件后的完整代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.2.</span> <span class="nav-text">React生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#React%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93"><span class="nav-number">1.2.1.</span> <span class="nav-text">React核心特性总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#props-state%E4%B8%8Erender%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">props, state与render函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React%E4%B8%ADref%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.3.</span> <span class="nav-text">React中ref的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E7%9A%84setState"><span class="nav-number">1.2.4.</span> <span class="nav-text">异步的setState</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React%E7%BB%84%E4%BB%B6%E7%9A%84%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.5.</span> <span class="nav-text">React组件的声明周期函数</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+    <script src="/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="/js/left-side-toggle.js"></script><script src="/js/libs/anime.min.js"></script><script src="/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
