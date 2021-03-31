@@ -227,7 +227,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义组件中的数据</span></span><br><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">  <span class="comment">// 接收参数props，传递给基类(Component)的构造函数</span></span><br><span class="line">  <span class="built_in">super</span>(props);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>前面提到，TodoList中的数据分为两部分：input中的数据和ul列表中的数据。我们要在constructor函数中，把这两种数据定义出来。</p>
-<p>React中，定义组建的数据要放在<code>this.state</code>中，以对象的形式进行定义。</p>
+<p>React中，定义组件的数据要放在<code>this.state</code>中，以对象的形式进行定义。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 接收参数props，传递给基类(Component)的构造函数</span></span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="comment">// React中，定义组件的数据要放在this.state中</span></span><br><span class="line">    <span class="comment">// inputValue定义input输入框中的数据</span></span><br><span class="line">    <span class="comment">// list定义ul列表中的数据</span></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      inputValue: <span class="string">&quot;hello World&quot;</span>,</span><br><span class="line">      list: [],</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>定义好数据后，将数据放到要渲染的标签中即可。使用花括号将其包裹起来。</p>
@@ -321,7 +321,7 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/03/26/1/"
+                           href="/2021/03/26/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E7%BB%84%E4%BB%B6%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
