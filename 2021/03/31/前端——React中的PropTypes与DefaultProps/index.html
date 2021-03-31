@@ -9,7 +9,7 @@
     
     <title>
         
-            前端——围绕React衍生出的思考 |
+            前端——React中的PropTypes与DefaultProps |
         
         Orla的随笔小记
     </title>
@@ -119,7 +119,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">前端——围绕React衍生出的思考</span>
+            <span class="title-hover-animation">前端——React中的PropTypes与DefaultProps</span>
         </div>
 
         
@@ -137,7 +137,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-03-31 09:36:20
+        <i class="fas fa-edit"></i>&nbsp;2021-03-31 13:19:27
     </span>
     
     
@@ -160,12 +160,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>710 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>737 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
         </span>
     
     
@@ -181,22 +181,34 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="围绕React衍生出的思考"><a href="#围绕React衍生出的思考" class="headerlink" title="围绕React衍生出的思考"></a>围绕React衍生出的思考</h1><h2 id="声明式开发"><a href="#声明式开发" class="headerlink" title="声明式开发"></a>声明式开发</h2><p>直接操作DOM的编程方式称为命令式开发，这种开发方式有60%-70%的操作都是在对DOM进行操作。</p>
-<p>React是声明式开发。React是面向数据编程的，我们只需要把数据构建好，React会自动根据数据来构建网站。这种声明式的开发可以帮助我们节省掉大量DOM操作的代码。</p>
-<h2 id="可以与其他框架并存"><a href="#可以与其他框架并存" class="headerlink" title="可以与其他框架并存"></a>可以与其他框架并存</h2><p>React编程过程中，可以同时使用其他框架（比如Vue、jQuery等），即可以与其他框架并存。</p>
-<h2 id="组件化开发"><a href="#组件化开发" class="headerlink" title="组件化开发"></a>组件化开发</h2><p>通过React继承Component来实现一个组件。所有组件首字母均大写。</p>
-<p>组件在整个应用之中是一个树状的结构。</p>
-<p><strong>组件之间的传值，是由父组件通过属性向子组件传值。</strong></p>
-<p><strong>子组件想操作父组件的数据，需要通过父组件向子组件传递一个方法，子组件调用这个方法，间接地操作父组件的数据，从而实现子组件和父组件的通信。</strong></p>
-<h2 id="单向数据流"><a href="#单向数据流" class="headerlink" title="单向数据流"></a>单向数据流</h2><p><strong>父组件可以向子组件传递内容，但是子组件只能使用父组件传递过来的值，绝不能改变这个值。</strong></p>
-<p>如果允许子组件改变父组件的值，假设页面中有五个子组件使用了父组件中的同一个值，一旦页面出现bug，错误很难被定位，需要在五个子组件中逐个排查。</p>
-<h2 id="视图层框架"><a href="#视图层框架" class="headerlink" title="视图层框架"></a>视图层框架</h2><p>React是一个视图层的框架。</p>
-<p>在小型项目中，借助React内部的传值机制就可以完成开发，但是大型项目中单单使用React是绝对不够的。组件在整个项目之中是一个树状的结构，如果一颗树中的叶结点想和根结点进行通信，需要层层向下传值，这无疑是很麻烦的。</p>
-<p>在大型项目中，需要一些数据层的框架帮助我们解决层层组件的传值问题。React只负责数据和页面的渲染的一些东西，至于组件之间的传值，交给其他框架来做。比如Redux。</p>
-<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>当我们编写React代码的时候，其实编写的都是一个个的函数。</p>
-<p>这样的方式有几个好处。</p>
-<p>首先，维护起来比较容易，当一个函数比较大的时候可以进行拆分，每个函数可以各司其职。</p>
-<p>其次，做前端自动化测试的时候，如果项目中都是由函数组成的，做自动化测试就很容易了，只需要给函数一个输入值，看函数是否能给出一个预期的输出即可。</p>
+            <h1 id="React中的PropTypes与DefaultProps"><a href="#React中的PropTypes与DefaultProps" class="headerlink" title="React中的PropTypes与DefaultProps"></a>React中的PropTypes与DefaultProps</h1><h2 id="PropTypes"><a href="#PropTypes" class="headerlink" title="PropTypes"></a>PropTypes</h2><p>使用propTypes可以实现子组件属性接收的强校验。即子组件接收的属性的类型应该是固定的，父组件不能随便传值。</p>
+<p>回到之前的子组件TodoItem中。</p>
+<p>想要使用PropTypes，首先要引入<code>PropTypes</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">&quot;prop-types&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在TodoItem中以对象的形式添加属性强校验，添加到文件底部。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 属性强校验</span></span><br><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  <span class="comment">// content的类型必须是string类型</span></span><br><span class="line">  content: PropTypes.string,</span><br><span class="line">  <span class="comment">// index的类型必须是number</span></span><br><span class="line">  index: PropTypes.number,</span><br><span class="line">  <span class="comment">// delFunction的类型必须是function</span></span><br><span class="line">  delFunction: PropTypes.func,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果传值类型不匹配，控制台会给出警告，警告不会阻止程序继续执行，但是会给出一个明显的提示。将<code>content</code>的类型设为number，会报以下警告。</p>
+<p><img src="https://i.loli.net/2021/03/31/ElVHXBAv57JUOQp.png" alt="propTypes类型不匹配.png"></p>
+<p>建议在开发过程中将<code>PropTypes</code>写上，这样一旦在传值过程中，有值传递错误时，会给出一些明显的提示。</p>
+<p>如果某个属性值并没有传值，则不会执行校验，设置PropTypes不会生效。</p>
+<p>如果要求必须给属性传值并且校验类型的话，要使用<code>isRequired</code></p>
+<p>现在在子组件TodoItem中添加一个<code>test</code>属性，父组件中并没有这个属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">&quot;prop-types&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleItemClick = <span class="built_in">this</span>.handleItemClick.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">handleItemClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; delFunction, index &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    delFunction(index);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 这里添加一个test属性，父组件并未传递这个属性</span></span><br><span class="line">    <span class="keyword">const</span> &#123; content, test &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;li onClick=&#123;<span class="built_in">this</span>.handleItemClick&#125; key=&#123;<span class="built_in">this</span>.props.index&#125;&gt;</span><br><span class="line">        &#123;content&#125; - &#123;test&#125;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 属性强校验</span></span><br><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  content: PropTypes.string,</span><br><span class="line">  index: PropTypes.number,</span><br><span class="line">  delFunction: PropTypes.func,</span><br><span class="line">  <span class="comment">// 添加isRequired，要求这个属性值必须传递并且进行校验</span></span><br><span class="line">  test: PropTypes.string.isRequired,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoItem;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>因为父组件并没有传递<code>test</code>这个属性，所以控制台会报一个警告。</p>
+<p><img src="https://i.loli.net/2021/03/31/t8E53eGQznUqiWZ.png" alt="isRequired.png"></p>
+<p>PropTypes除了单一的类型，还可以有其他的写法。比如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  <span class="comment">// content的类型必须是string或number类型</span></span><br><span class="line">  content: PropTypes.arrayOf(PropTypes.string, PropTypes.number),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其他写法可以详见<a class="link"   target="_blank" rel="noopener" href="https://reactjs.org/docs/typechecking-with-proptypes.html" >官网文档<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="DefaultProps"><a href="#DefaultProps" class="headerlink" title="DefaultProps"></a>DefaultProps</h2><p>有时候父组件确实无法给某个属性传值，但是子组件中又要求这个属性必须有值，这时候就需要用到<code>DefaultProps</code>。</p>
+<p>同样要在子组件中以对象的形式进行定义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 属性强校验</span></span><br><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  content: PropTypes.string,</span><br><span class="line">  index: PropTypes.number,</span><br><span class="line">  delFunction: PropTypes.func,</span><br><span class="line">  <span class="comment">// 添加isRequired，要求这个属性值必须传递并且进行校验</span></span><br><span class="line">  test: PropTypes.string.isRequired,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认值</span></span><br><span class="line">TodoItem.defaultProps = &#123;</span><br><span class="line">  test: <span class="string">&quot;hello world&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码表示，父组件需要给子组件传递一个<code>test</code>，类型为string，而且是必填的。如果父组件没有传这个<code>test</code>，则会给<code>test</code>一个默认值，这个默认值为hello world。这时，即使父组件没有向子组件传递<code>test</code>也没有关系，因为我们定义了默认值。</p>
+<p><img src="https://i.loli.net/2021/03/31/B6GT8i7NySkRHUr.gif" alt="PropTypes和DefaultProps.gif"></p>
 
         </div>
 
@@ -205,29 +217,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E4%B8%AD%E7%9A%84PropTypes%E4%B8%8EDefaultProps/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——React中的PropTypes与DefaultProps</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/03/26/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E7%BB%84%E4%BB%B6%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"
+                           href="/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E5%9B%B4%E7%BB%95React%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——React组件与生命周期</span>
+                                <span class="post-nav-title-item">前端——围绕React衍生出的思考</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -397,7 +394,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%B4%E7%BB%95React%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83"><span class="nav-number">1.</span> <span class="nav-text">围绕React衍生出的思考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E5%BC%80%E5%8F%91"><span class="nav-number">1.1.</span> <span class="nav-text">声明式开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E4%B8%8E%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%B9%B6%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">可以与其他框架并存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91"><span class="nav-number">1.3.</span> <span class="nav-text">组件化开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="nav-number">1.4.</span> <span class="nav-text">单向数据流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E5%B1%82%E6%A1%86%E6%9E%B6"><span class="nav-number">1.5.</span> <span class="nav-text">视图层框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="nav-number">1.6.</span> <span class="nav-text">函数式编程</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E4%B8%AD%E7%9A%84PropTypes%E4%B8%8EDefaultProps"><span class="nav-number">1.</span> <span class="nav-text">React中的PropTypes与DefaultProps</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PropTypes"><span class="nav-number">1.1.</span> <span class="nav-text">PropTypes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DefaultProps"><span class="nav-number">1.2.</span> <span class="nav-text">DefaultProps</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
