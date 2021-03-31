@@ -1,187 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Orla(CYY)">
-    
-    <title>
-        
-            前端——React基础 |
-        
-        Orla的随笔小记
-    </title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="shortcut icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"www.cyystudying.top","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/profile.jpg","favicon":"/images/logo.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.1"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.cyystudying.top","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="description" content="React基础什么是组件简单来说，组件就是页面上的一部分。一个页面由多个组件构成。多个组件共同渲染出一个页面。  想让一个组件往页面上渲染内容，需要在这个组件中写一个render()函数 react渲染页面的流程： index.html –&gt; 执行index.js –&gt; index.js中引入组件 –&gt; 组件通过render()函数来定义需要渲染的内容 –&gt; 组件在inde">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端——React基础">
+<meta property="og:url" content="http://www.cyystudying.top/2021/03/25/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Orla的个人博客">
+<meta property="og:description" content="React基础什么是组件简单来说，组件就是页面上的一部分。一个页面由多个组件构成。多个组件共同渲染出一个页面。  想让一个组件往页面上渲染内容，需要在这个组件中写一个render()函数 react渲染页面的流程： index.html –&gt; 执行index.js –&gt; index.js中引入组件 –&gt; 组件通过render()函数来定义需要渲染的内容 –&gt; 组件在inde">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/03/25/NiLCBYP1vEkmwX6.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/25/f4rweh3WSdNxbus.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/25/cLPY4E9CrwebmsW.gif">
+<meta property="og:image" content="https://i.loli.net/2021/03/25/TYoZb9QMeCrLKjF.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/25/wh1T4oYNKV9UBfm.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/25/uP4ACyOsKxBkfez.gif">
+<meta property="og:image" content="https://i.loli.net/2021/03/25/ieSEjVA1WIbZM5Y.gif">
+<meta property="article:published_time" content="2021-03-25T09:07:41.000Z">
+<meta property="article:modified_time" content="2021-03-30T06:20:22.195Z">
+<meta property="article:author" content="Orla">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/25/NiLCBYP1vEkmwX6.png">
 
 
-<body>
-<div class="progress-bar-container">
-    
+<link rel="canonical" href="http://www.cyystudying.top/2021/03/25/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E5%9F%BA%E7%A1%80/">
 
-    
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>前端——React基础 | Orla的个人博客</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Orla的个人博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
-<main class="page-container">
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">React基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%84%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">什么是组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX%E8%AF%AD%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">JSX语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8React%E7%BC%96%E5%86%99ToDoList"><span class="nav-number">1.3.</span> <span class="nav-text">使用React编写ToDoList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.1.</span> <span class="nav-text">页面结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React%E4%B8%AD%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E2%98%85"><span class="nav-number">1.4.</span> <span class="nav-text">React中数据驱动的设计思想和事件绑定★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0TodoList%E6%96%B0%E5%A2%9E%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD"><span class="nav-number">1.5.</span> <span class="nav-text">实现TodoList新增删除功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E"><span class="nav-number">1.5.1.</span> <span class="nav-text">新增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">1.5.2.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9AJSX%E7%9A%84%E8%AF%AD%E6%B3%95%E7%BB%86%E8%8A%82"><span class="nav-number">1.6.</span> <span class="nav-text">更多JSX的语法细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bind-this-%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">bind(this)的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX%E7%9A%84%E7%AE%80%E5%8C%96"><span class="nav-number">1.6.2.</span> <span class="nav-text">JSX的简化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4TodoList%E4%BB%A3%E7%A0%81"><span class="nav-number">1.7.</span> <span class="nav-text">完整TodoList代码</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Orla</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
 
     
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            <a class="logo-title" href="/">
-                Orla的随笔小记
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
-        </div>
+    <div class="main-inner post posts-expand">
 
-        <div class="page-main-content-middle">
 
-            <div class="main-content">
+  
 
-                
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">前端——React基础</span>
-        </div>
+<div class="post-block">
+  
+  
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/profile.jpg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">Orla(CYY)</span>
-                        
-                            <span class="author-label">Lv1</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-03-25 17:07:41
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://www.cyystudying.top/2021/03/25/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Orla">
+      <meta itemprop="description" content="">
     </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/React/">React</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>3.9k Words</span>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Orla的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端——React基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-25 17:07:41" itemprop="dateCreated datePublished" datetime="2021-03-25T17:07:41+08:00">2021-03-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
         </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>17 Mins</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-03-30 14:20:22" itemprop="dateModified" datetime="2021-03-30T14:20:22+08:00">2021-03-30</time>
+      </span>
+
+  
 </div>
 
-                    </div>
-                </div>
-            </div>
-        
+        </div>
+      </header>
 
-        <div class="article-content markdown-body">
-            <h1 id="React基础"><a href="#React基础" class="headerlink" title="React基础"></a>React基础</h1><h2 id="什么是组件"><a href="#什么是组件" class="headerlink" title="什么是组件"></a>什么是组件</h2><p>简单来说，组件就是页面上的一部分。一个页面由多个组件构成。多个组件共同渲染出一个页面。</p>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="React基础"><a href="#React基础" class="headerlink" title="React基础"></a>React基础</h1><h2 id="什么是组件"><a href="#什么是组件" class="headerlink" title="什么是组件"></a>什么是组件</h2><p>简单来说，组件就是页面上的一部分。一个页面由多个组件构成。多个组件共同渲染出一个页面。</p>
 <p><img src="https://i.loli.net/2021/03/25/NiLCBYP1vEkmwX6.png" alt="react中的组件.png"></p>
 <p>想让一个组件往页面上渲染内容，需要在这个组件中写一个render()函数</p>
 <p>react渲染页面的流程：</p>
@@ -311,268 +388,98 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TodoList组件，组件开头字母大写</span></span><br><span class="line"><span class="comment">// 引入Fragment组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 定义组件中的数据</span></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 接收参数props，传递给基类(Component)的构造函数</span></span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.handleInputChange = <span class="built_in">this</span>.handleInputChange.bind(<span class="built_in">this</span>);</span><br><span class="line">    <span class="built_in">this</span>.handleKeyUp = <span class="built_in">this</span>.handleKeyUp.bind(<span class="built_in">this</span>);</span><br><span class="line">    <span class="comment">// React中，定义组件的数据要放在this.state中</span></span><br><span class="line">    <span class="comment">// inputValue定义input输入框中的数据</span></span><br><span class="line">    <span class="comment">// list定义ul列表中的数据</span></span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      inputValue: <span class="string">&quot;&quot;</span>,</span><br><span class="line">      list: [],</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleInputChange</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 这个函数的this默认是undefined</span></span><br><span class="line">    <span class="comment">// 想要让this指向这个组件，需要在render函数中调用此方法时使用bind(this)</span></span><br><span class="line">    <span class="comment">// console.log(e.target.value);</span></span><br><span class="line">    <span class="comment">// 数据不能直接改变</span></span><br><span class="line">    <span class="comment">// this.state.inputValue = e.target.value;</span></span><br><span class="line">    <span class="comment">// 要使用setState方法来改变组件中的数据</span></span><br><span class="line">    <span class="comment">// console.log(this);</span></span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      inputValue: e.target.value,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleKeyUp</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 回车键的键盘码是13，按下回车代表输入完毕，添加列表项</span></span><br><span class="line">    <span class="comment">// 由于函数handleInputChange,this.state.inputValue的值会随着输入框中内容的改变动态改变</span></span><br><span class="line">    <span class="comment">// 获取this.state.inputValue就是获取输入框当前内容</span></span><br><span class="line">    <span class="comment">// 添加后自动清空输入框</span></span><br><span class="line">    <span class="keyword">if</span> (e.keyCode === <span class="number">13</span> &amp;&amp; e.target.value.trim() !== <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> list = [...this.state.list, <span class="built_in">this</span>.state.inputValue.trim()];</span><br><span class="line">      <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">        list: list,</span><br><span class="line">        inputValue: <span class="string">&quot;&quot;</span>,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleItemClick</span>(<span class="params">index</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> list = [...this.state.list];</span><br><span class="line">    list.splice(index, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">      list,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">getListItems</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state.list.map(<span class="function">(<span class="params">value, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        &lt;li key=&#123;index&#125; onClick=&#123;<span class="built_in">this</span>.handleItemClick.bind(<span class="built_in">this</span>, index)&#125;&gt;</span><br><span class="line">          &#123;value&#125;</span><br><span class="line">        &lt;/li&gt;</span><br><span class="line">      );</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// render一次只能渲染一个外部标签，想渲染多个，需要将标签放在一个div中。</span></span><br><span class="line">    <span class="comment">// 但是这样的做法会导致dom中多出来一个div</span></span><br><span class="line">    <span class="comment">// React16中提供了占位符组件Fragment</span></span><br><span class="line">    <span class="comment">// 将所有组件放在Fragment中，不会在dom中添加其他的元素</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &#123;<span class="comment">/* 使用花括号将数据包裹起来 */</span>&#125;</span><br><span class="line">        &lt;input</span><br><span class="line">          value=&#123;<span class="built_in">this</span>.state.inputValue&#125;</span><br><span class="line">          onChange=&#123;<span class="built_in">this</span>.handleInputChange&#125;</span><br><span class="line">          onKeyUp=&#123;<span class="built_in">this</span>.handleKeyUp&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;ul&gt;&#123;<span class="built_in">this</span>.getListItems()&#125;&lt;/ul&gt;</span><br><span class="line">      &lt;/Fragment&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoList;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-        </div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
 
         
 
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/03/26/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E7%BB%84%E4%BB%B6%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——React组件与生命周期</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2021/03/23/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E5%8D%95%E8%A1%8C%E5%A4%9A%E8%A1%8C%E6%96%87%E5%AD%97%E6%BA%A2%E5%87%BA%E7%9C%81%E7%95%A5/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——单行/多行文字溢出省略</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/23/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E5%8D%95%E8%A1%8C%E5%A4%9A%E8%A1%8C%E6%96%87%E5%AD%97%E6%BA%A2%E5%87%BA%E7%9C%81%E7%95%A5/" rel="prev" title="前端——单行/多行文字溢出省略">
+                  <i class="fa fa-chevron-left"></i> 前端——单行/多行文字溢出省略
+                </a>
             </div>
-        
-
-        
-            <div class="comment-container">
-                <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;Comments</i>
-    </div>
-    
-
-        
-            
-    <div class="twikoo-container">
-        <script 
-                src="//cdn.jsdelivr.net/npm/twikoo@1.0.0/dist/twikoo.all.min.js"
-        ></script>
-        <div id="twikoo-comment"></div>
-        <script >
-            function loadTwikoo() {
-                twikoo.init({
-                    el: '#twikoo-comment',
-                    envId: 'orlablog-6gs7djo1819bd3c8',
-                    region: '',
-                });
-            }
-
-            if ('false') {
-                const loadTwikooTimeout = setTimeout(() => {
-                    loadTwikoo();
-                    clearTimeout(loadTwikooTimeout);
-                }, 1000);
-            } else {
-                window.addEventListener('DOMContentLoaded', loadTwikoo);
-            }
-        </script>
-    </div>
-
-
-
-        
-    
-</div>
-
+            <div class="post-nav-item">
+                <a href="/2021/03/26/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E7%BB%84%E4%BB%B6%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="next" title="前端——React组件与生命周期">
+                  前端——React组件与生命周期 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
-        
-    </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
-                
-            </div>
 
-        </div>
 
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2021</span>&nbsp;-&nbsp;
-            
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Orla(CYY)</a>
-        </div>
-        
-            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
-        </div>
-        
-    </div>
-</footer>
 
-        </div>
-    </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
-            </li>
-        
 
-        <!-- go comment -->
-        
-            <li class="go-comment">
-                <i class="fas fa-comment"></i>
-            </li>
-        
-    </ul>
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 </div>
+  </main>
 
-        </div>
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
 
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Orla</span>
 </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
 
     </div>
+  </footer>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">React基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%84%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">什么是组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX%E8%AF%AD%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">JSX语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8React%E7%BC%96%E5%86%99ToDoList"><span class="nav-number">1.3.</span> <span class="nav-text">使用React编写ToDoList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.1.</span> <span class="nav-text">页面结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React%E4%B8%AD%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E2%98%85"><span class="nav-number">1.4.</span> <span class="nav-text">React中数据驱动的设计思想和事件绑定★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0TodoList%E6%96%B0%E5%A2%9E%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD"><span class="nav-number">1.5.</span> <span class="nav-text">实现TodoList新增删除功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E"><span class="nav-number">1.5.1.</span> <span class="nav-text">新增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">1.5.2.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9AJSX%E7%9A%84%E8%AF%AD%E6%B3%95%E7%BB%86%E8%8A%82"><span class="nav-number">1.6.</span> <span class="nav-text">更多JSX的语法细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bind-this-%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">bind(this)的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX%E7%9A%84%E7%AE%80%E5%8C%96"><span class="nav-number">1.6.2.</span> <span class="nav-text">JSX的简化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4TodoList%E4%BB%A3%E7%A0%81"><span class="nav-number">1.7.</span> <span class="nav-text">完整TodoList代码</span></a></li></ol></li></ol>
-    </div>
-</div>
-        </aside>
-    
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-</main>
-
-
-
-<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
-
-
-    <script src="/js/local-search.js"></script>
-
-
-
-    <script src="/js/code-copy.js"></script>
+  
 
 
 
 
-<div class="post-scripts">
-    
-        <script src="/js/left-side-toggle.js"></script><script src="/js/libs/anime.min.js"></script><script src="/js/toc.js"></script>
-    
-</div>
+
+
+  
+
+
 
 
 

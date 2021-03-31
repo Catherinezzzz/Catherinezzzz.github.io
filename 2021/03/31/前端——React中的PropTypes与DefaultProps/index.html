@@ -1,187 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Orla(CYY)">
-    
-    <title>
-        
-            前端——React中的PropTypes与DefaultProps |
-        
-        Orla的随笔小记
-    </title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="shortcut icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"www.cyystudying.top","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/profile.jpg","favicon":"/images/logo.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.1"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.cyystudying.top","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="description" content="React中的PropTypes与DefaultPropsPropTypes使用propTypes可以实现子组件属性接收的强校验。即子组件接收的属性的类型应该是固定的，父组件不能随便传值。 回到之前的子组件TodoItem中。 想要使用PropTypes，首先要引入PropTypes。 1import PropTypes from &quot;prop-types&quot;;  在TodoIte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端——React中的PropTypes与DefaultProps">
+<meta property="og:url" content="http://www.cyystudying.top/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E4%B8%AD%E7%9A%84PropTypes%E4%B8%8EDefaultProps/index.html">
+<meta property="og:site_name" content="Orla的个人博客">
+<meta property="og:description" content="React中的PropTypes与DefaultPropsPropTypes使用propTypes可以实现子组件属性接收的强校验。即子组件接收的属性的类型应该是固定的，父组件不能随便传值。 回到之前的子组件TodoItem中。 想要使用PropTypes，首先要引入PropTypes。 1import PropTypes from &quot;prop-types&quot;;  在TodoIte">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/ElVHXBAv57JUOQp.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/t8E53eGQznUqiWZ.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/31/B6GT8i7NySkRHUr.gif">
+<meta property="article:published_time" content="2021-03-31T05:19:27.000Z">
+<meta property="article:modified_time" content="2021-03-31T05:22:49.478Z">
+<meta property="article:author" content="Orla">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/31/ElVHXBAv57JUOQp.png">
 
 
-<body>
-<div class="progress-bar-container">
-    
+<link rel="canonical" href="http://www.cyystudying.top/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E4%B8%AD%E7%9A%84PropTypes%E4%B8%8EDefaultProps/">
 
-    
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>前端——React中的PropTypes与DefaultProps | Orla的个人博客</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Orla的个人博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
-<main class="page-container">
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E4%B8%AD%E7%9A%84PropTypes%E4%B8%8EDefaultProps"><span class="nav-number">1.</span> <span class="nav-text">React中的PropTypes与DefaultProps</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PropTypes"><span class="nav-number">1.1.</span> <span class="nav-text">PropTypes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DefaultProps"><span class="nav-number">1.2.</span> <span class="nav-text">DefaultProps</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Orla</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
 
     
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            <a class="logo-title" href="/">
-                Orla的随笔小记
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
-        </div>
+    <div class="main-inner post posts-expand">
 
-        <div class="page-main-content-middle">
 
-            <div class="main-content">
+  
 
-                
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
 
-        <div class="article-title">
-            <span class="title-hover-animation">前端——React中的PropTypes与DefaultProps</span>
-        </div>
+<div class="post-block">
+  
+  
 
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/profile.jpg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">Orla(CYY)</span>
-                        
-                            <span class="author-label">Lv1</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-03-31 13:19:27
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://www.cyystudying.top/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E4%B8%AD%E7%9A%84PropTypes%E4%B8%8EDefaultProps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Orla">
+      <meta itemprop="description" content="">
     </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/React/">React</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>737 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Orla的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端——React中的PropTypes与DefaultProps
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-03-31 13:19:27 / Modified: 13:22:49" itemprop="dateCreated datePublished" datetime="2021-03-31T13:19:27+08:00">2021-03-31</time>
+    </span>
+
+  
 </div>
 
-                    </div>
-                </div>
-            </div>
-        
+        </div>
+      </header>
 
-        <div class="article-content markdown-body">
-            <h1 id="React中的PropTypes与DefaultProps"><a href="#React中的PropTypes与DefaultProps" class="headerlink" title="React中的PropTypes与DefaultProps"></a>React中的PropTypes与DefaultProps</h1><h2 id="PropTypes"><a href="#PropTypes" class="headerlink" title="PropTypes"></a>PropTypes</h2><p>使用propTypes可以实现子组件属性接收的强校验。即子组件接收的属性的类型应该是固定的，父组件不能随便传值。</p>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="React中的PropTypes与DefaultProps"><a href="#React中的PropTypes与DefaultProps" class="headerlink" title="React中的PropTypes与DefaultProps"></a>React中的PropTypes与DefaultProps</h1><h2 id="PropTypes"><a href="#PropTypes" class="headerlink" title="PropTypes"></a>PropTypes</h2><p>使用propTypes可以实现子组件属性接收的强校验。即子组件接收的属性的类型应该是固定的，父组件不能随便传值。</p>
 <p>回到之前的子组件TodoItem中。</p>
 <p>想要使用PropTypes，首先要引入<code>PropTypes</code>。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">&quot;prop-types&quot;</span>;</span><br></pre></td></tr></table></figure>
@@ -202,7 +269,7 @@
 <p>PropTypes除了单一的类型，还可以有其他的写法。比如</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  <span class="comment">// content的类型必须是string或number类型</span></span><br><span class="line">  content: PropTypes.arrayOf(PropTypes.string, PropTypes.number),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>其他写法可以详见<a class="link"   target="_blank" rel="noopener" href="https://reactjs.org/docs/typechecking-with-proptypes.html" >官网文档<i class="fas fa-external-link-alt"></i></a></p>
+<p>其他写法可以详见<a target="_blank" rel="noopener" href="https://reactjs.org/docs/typechecking-with-proptypes.html">官网文档</a></p>
 <h2 id="DefaultProps"><a href="#DefaultProps" class="headerlink" title="DefaultProps"></a>DefaultProps</h2><p>有时候父组件确实无法给某个属性传值，但是子组件中又要求这个属性必须有值，这时候就需要用到<code>DefaultProps</code>。</p>
 <p>同样要在子组件中以对象的形式进行定义。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 属性强校验</span></span><br><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  content: PropTypes.string,</span><br><span class="line">  index: PropTypes.number,</span><br><span class="line">  delFunction: PropTypes.func,</span><br><span class="line">  <span class="comment">// 添加isRequired，要求这个属性值必须传递并且进行校验</span></span><br><span class="line">  test: PropTypes.string.isRequired,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认值</span></span><br><span class="line">TodoItem.defaultProps = &#123;</span><br><span class="line">  test: <span class="string">&quot;hello world&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -210,253 +277,95 @@
 <p>以上代码表示，父组件需要给子组件传递一个<code>test</code>，类型为string，而且是必填的。如果父组件没有传这个<code>test</code>，则会给<code>test</code>一个默认值，这个默认值为hello world。这时，即使父组件没有向子组件传递<code>test</code>也没有关系，因为我们定义了默认值。</p>
 <p><img src="https://i.loli.net/2021/03/31/B6GT8i7NySkRHUr.gif" alt="PropTypes和DefaultProps.gif"></p>
 
-        </div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
 
         
 
-        
-            <div class="article-nav">
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E5%9B%B4%E7%BB%95React%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——围绕React衍生出的思考</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E5%9B%B4%E7%BB%95React%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/" rel="prev" title="前端——围绕React衍生出的思考">
+                  <i class="fa fa-chevron-left"></i> 前端——围绕React衍生出的思考
+                </a>
             </div>
-        
-
-        
-            <div class="comment-container">
-                <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;Comments</i>
-    </div>
-    
-
-        
-            
-    <div class="twikoo-container">
-        <script 
-                src="//cdn.jsdelivr.net/npm/twikoo@1.0.0/dist/twikoo.all.min.js"
-        ></script>
-        <div id="twikoo-comment"></div>
-        <script >
-            function loadTwikoo() {
-                twikoo.init({
-                    el: '#twikoo-comment',
-                    envId: 'orlablog-6gs7djo1819bd3c8',
-                    region: '',
-                });
-            }
-
-            if ('false') {
-                const loadTwikooTimeout = setTimeout(() => {
-                    loadTwikoo();
-                    clearTimeout(loadTwikooTimeout);
-                }, 1000);
-            } else {
-                window.addEventListener('DOMContentLoaded', loadTwikoo);
-            }
-        </script>
-    </div>
-
-
-
-        
-    
-</div>
-
+            <div class="post-nav-item">
             </div>
-        
-    </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
-                
-            </div>
 
-        </div>
 
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2021</span>&nbsp;-&nbsp;
-            
-            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Orla(CYY)</a>
-        </div>
-        
-            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
-        </div>
-        
-    </div>
-</footer>
 
-        </div>
-    </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
-            </li>
-        
 
-        <!-- go comment -->
-        
-            <li class="go-comment">
-                <i class="fas fa-comment"></i>
-            </li>
-        
-    </ul>
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 </div>
+  </main>
 
-        </div>
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
 
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Orla</span>
 </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
 
     </div>
+  </footer>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E4%B8%AD%E7%9A%84PropTypes%E4%B8%8EDefaultProps"><span class="nav-number">1.</span> <span class="nav-text">React中的PropTypes与DefaultProps</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PropTypes"><span class="nav-number">1.1.</span> <span class="nav-text">PropTypes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DefaultProps"><span class="nav-number">1.2.</span> <span class="nav-text">DefaultProps</span></a></li></ol></li></ol>
-    </div>
-</div>
-        </aside>
-    
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-</main>
-
-
-
-<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
-
-
-    <script src="/js/local-search.js"></script>
-
-
-
-    <script src="/js/code-copy.js"></script>
+  
 
 
 
 
-<div class="post-scripts">
-    
-        <script src="/js/left-side-toggle.js"></script><script src="/js/libs/anime.min.js"></script><script src="/js/toc.js"></script>
-    
-</div>
+
+
+  
+
+
 
 
 
