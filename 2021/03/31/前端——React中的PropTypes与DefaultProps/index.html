@@ -160,7 +160,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>737 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>748 Words</span>
         </span>
     
     
@@ -200,7 +200,7 @@
 <p>因为父组件并没有传递<code>test</code>这个属性，所以控制台会报一个警告。</p>
 <p><img src="https://i.loli.net/2021/03/31/t8E53eGQznUqiWZ.png" alt="isRequired.png"></p>
 <p>PropTypes除了单一的类型，还可以有其他的写法。比如</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  <span class="comment">// content的类型必须是string或number类型</span></span><br><span class="line">  content: PropTypes.arrayOf(PropTypes.string, PropTypes.number),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  <span class="comment">// content的类型必须是数组，数组中的值应该为string或number类型</span></span><br><span class="line">  content: PropTypes.arrayOf(PropTypes.string, PropTypes.number),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>其他写法可以详见<a class="link"   target="_blank" rel="noopener" href="https://reactjs.org/docs/typechecking-with-proptypes.html" >官网文档<i class="fas fa-external-link-alt"></i></a></p>
 <h2 id="DefaultProps"><a href="#DefaultProps" class="headerlink" title="DefaultProps"></a>DefaultProps</h2><p>有时候父组件确实无法给某个属性传值，但是子组件中又要求这个属性必须有值，这时候就需要用到<code>DefaultProps</code>。</p>
