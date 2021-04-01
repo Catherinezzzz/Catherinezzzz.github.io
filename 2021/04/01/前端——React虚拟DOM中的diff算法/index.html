@@ -199,17 +199,17 @@
 <p>当<code>state</code>或者<code>props</code>改变时，数据就发生了改变。<code>props</code>的改变也是因为父组件的<code>state</code>发生了改变，归根结底，数据发生变化都是因为调用了<code>setState()</code>方法。</p>
 <p><a href="http://www.cyystudying.top/2021/03/26/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E7%BB%84%E4%BB%B6%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">之前的文章</a>中提到过，<code>setState()</code>是异步执行的。<strong>之所以异步，是为了提升React底层的性能。</strong></p>
 <p>假设我们在很短的时间内连续调用三次<code>setState()</code>，即连续修改三次数据，React并不会进行三次虚拟DOM的比对，而是将三次<code>setState()</code>合并为一个<code>setState()</code>，只做一次虚拟DOM的比对，然后去更新一次DOM。这样的话，就可以省去两次虚拟DOM的比对带来的性能损耗。这就是<code>setState()</code>设为异步的初衷。</p>
-<p><img src="D:\Blog\drafts\React-简书项目\简书项目截图\setState修改数据.png" alt="setState修改数据"></p>
+<p><img src="https://i.loli.net/2021/04/01/gJz9ZO238TpNcAE.png" alt="setState修改数据.png"></p>
 <p>diff算法可以简单理解为，在对两个虚拟DOM进行比较时找不同的算法。</p>
 <p>diff算法中有一个很重要的概念：<strong>同级比较</strong>。</p>
-<p><img src="D:\Blog\drafts\React-简书项目\简书项目截图\diff算法同级比较.png" alt="diff算法同级比较"></p>
+<p><img src="https://i.loli.net/2021/04/01/uOSN41Wj8Bz2pDF.png" alt="diff算法同级比较.png"></p>
 <p>这张图中左边的树代表原始的虚拟DOM，右侧的树代表新生成的虚拟DOM。我们现在要用diff算法来比对这两棵树，找到差异之后去更新真实的DOM。</p>
 <p>diff算法会怎么进行比对呢？同层比对。</p>
 <p>首先，会比较最顶层的虚拟DOM结点（图中红框部分），看这两个结点是否一致。假设这一层的两个结点一致，再去比较下一层，也就是第二层（图中紫框部分）。</p>
 <p><strong>如果顶层的两个结点不一致</strong>，那么React就不会继续往下层比较了。React在发现第一层DOM存在差异之后，会把原始页面上的虚拟DOM对应的所有结点的DOM全部删除，重新生成所有DOM，然后用重新生成的DOM替换原始页面上的DOM。</p>
 <p>这样一来，如果在第一层就发现了差异，那么就会重新渲染整个DOM，这看起来性能比较低。</p>
 <p>事实上也确实如此，但是这样进行同层比对，带来的好处就是，比对的算法非常简单，只需要一层一层做对比即可。算法简单就会使得比对的速度很快，所以，虽然可能会造成DOM上重新渲染的性能浪费，但是会大大减少两个虚拟DOM进行比对的算法的性能消耗。</p>
-<h2 id="key值的引入"><a href="#key值的引入" class="headerlink" title="key值的引入"></a>key值的引入</h2><p><img src="D:\Blog\drafts\React-简书项目\简书项目截图\diff算法中key值的引入.png" alt="diff算法中key值的引入"></p>
+<h2 id="key值的引入"><a href="#key值的引入" class="headerlink" title="key值的引入"></a>key值的引入</h2><p><img src="https://i.loli.net/2021/04/01/2Q46SMjzAlemH51.png" alt="diff算法中key值的引入.png"></p>
 <p>假设现在有一个数组，数组中包含五个数据。在页面第一次渲染的时候，会把这五个数据映射成五个虚拟DOM结点，生成一个小的虚拟DOM树。</p>
 <p>现在，往数组里增加了一项内容（左图蓝色结点），于是，数据发生了变化，生成一个新的虚拟DOM树，然后将两个虚拟DOM进行比对（分别对应左图中上下两排结点），如果每一个虚拟DOM结点没有一个key值的话，每个结点都没有自己的名字。当我们进行比对的时候，结点和结点之间的关系就很难被确立。</p>
 <p>假如在进行虚拟DOM的比对时，可以给每一个虚拟DOM结点起一个名字，那么比较起来就方便多了（如右图）。虚拟DOM的比对可以根据key值做关联，如果原先DOM结点和新的DOM结点的key值一致，那么这个结点就可以复用。那么，只要把新的虚拟DOM树中和原来虚拟DOM树中key值不相同的结点进行相应的修改就可以了。这样的话，就极大地提高了虚拟DOM比对的性能。</p>
