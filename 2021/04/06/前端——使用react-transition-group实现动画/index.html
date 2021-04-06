@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Orla(CYY)">
+    
+    <title>
+        
+            前端——使用react-transition-group实现动画 |
+        
+        Orla的随笔小记
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"www.cyystudying.top","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/profile.jpg","favicon":"/images/logo.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Orla的随笔小记
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">前端——使用react-transition-group实现动画</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/profile.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Orla(CYY)</span>
+                        
+                            <span class="author-label">Lv2</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-04-06 17:16:26
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/React/">React</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>869 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="使用react-transition-group实现动画"><a href="#使用react-transition-group实现动画" class="headerlink" title="使用react-transition-group实现动画"></a>使用react-transition-group实现动画</h1><p>首先安装react-transition-group。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install react-transition-group --save</span><br></pre></td></tr></table></figure>
+
+<p>然后在组件中引入它。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; CSSTransition &#125; <span class="keyword">from</span> <span class="string">&quot;react-transition-group&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单个元素的动画"><a href="#单个元素的动画" class="headerlink" title="单个元素的动画"></a>单个元素的动画</h2><p>CSSTransition本质上是一个组件。在render函数中使用CSSTransition包裹想要添加CSS的JSX标签，CSSTransition会帮助我们自动添加/删除CSS的class。</p>
+<p>这个组件要设置一些属性。</p>
+<ul>
+<li>in的属性：代表动画的状态，使用true和false来控制是入场动画还是出场动画。</li>
+<li>timeout属性：代表动画持续时间</li>
+<li>classNames属性（注意有个s）：代表class的前缀</li>
+<li>unmountOnExit属性：动画执行完毕之后，移除对应的DOM</li>
+<li>appear属性：布尔值，true代表第一次展示在页面上时也执行动画</li>
+</ul>
+<p>index.js:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用JSX语法就要引入React</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&quot;./App&quot;</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;React.StrictMode&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/React.StrictMode&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&quot;root&quot;</span>)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>App.js:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./style.css&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CSSTransition &#125; <span class="keyword">from</span> <span class="string">&quot;react-transition-group&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      show: <span class="literal">true</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">this</span>.handleToggle = <span class="built_in">this</span>.handleToggle.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;CSSTransition</span><br><span class="line">          <span class="keyword">in</span>=&#123;<span class="built_in">this</span>.state.show&#125;</span><br><span class="line">          timeout=&#123;<span class="number">1000</span>&#125;</span><br><span class="line">          classNames=<span class="string">&quot;fade&quot;</span></span><br><span class="line">          unmountOnExit</span><br><span class="line">          appear=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">        &gt;</span><br><span class="line">          &lt;div&gt;app&lt;/div&gt;</span><br><span class="line">        &lt;/CSSTransition&gt;</span><br><span class="line"></span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.handleToggle&#125;&gt;toggle&lt;/button&gt;</span><br><span class="line">      &lt;/Fragment&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleToggle</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        show: <span class="built_in">this</span>.state.show ? <span class="literal">false</span> : <span class="literal">true</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>style.css:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 入场动画执行的第一个时刻 */</span></span><br><span class="line"><span class="selector-class">.fade-enter</span>,</span><br><span class="line"><span class="selector-class">.fade-appear</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 入场动画执行的过程 */</span></span><br><span class="line"><span class="selector-class">.fade-enter-active</span>,</span><br><span class="line"><span class="selector-class">.fade-appear-active</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">  <span class="attribute">transition</span>: opacity <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 入场动画执行完毕 */</span></span><br><span class="line"><span class="selector-class">.fade-enter-done</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 出场动画执行的第一个时刻 */</span></span><br><span class="line"><span class="selector-class">.fade-exit</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 出场动画执行的过程 */</span></span><br><span class="line"><span class="selector-class">.fade-exit-active</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">transition</span>: opacity <span class="number">1s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 出场动画执行完毕 */</span></span><br><span class="line"><span class="selector-class">.fade-exit-done</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>CSS中的class名称含义：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.xxx-enter</td>
+<td>入场动画执行的第一个时刻</td>
+</tr>
+<tr>
+<td>.xxx-enter-active</td>
+<td>入场后到入场动画结束的过程，在其中定义transition</td>
+</tr>
+<tr>
+<td>.xxx-enter-done</td>
+<td>入场动画执行完毕后</td>
+</tr>
+<tr>
+<td>.xxx-exit</td>
+<td>出场动画执行的第一个时刻</td>
+</tr>
+<tr>
+<td>.xxx-exit-active</td>
+<td>出场后到出场动画结束的过程，在其中定义transition</td>
+</tr>
+<tr>
+<td>.xxx-exit-done</td>
+<td>出场动画执行完毕后</td>
+</tr>
+<tr>
+<td>.xxx-appear</td>
+<td>当设置appear={true}时生效，第一次渲染时也执行入场动画，和.xxx-enter一起写</td>
+</tr>
+<tr>
+<td>.xxx-appear-active</td>
+<td>当设置appear={true}时生效，第一次渲染时执行的入场动画，和.xxx-enter-active一起写</td>
+</tr>
+</tbody></table>
+<h2 id="多个元素的动画"><a href="#多个元素的动画" class="headerlink" title="多个元素的动画"></a>多个元素的动画</h2><p>想要多个元素实现相同的动画，需要使用TransitionGroup，同样需要提前引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; CSSTransition, TransitionGroup &#125; <span class="keyword">from</span> <span class="string">&quot;react-transition-group&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>TransitionGroup标签要写在所有组件的外部，每一个具体的DOM标签外仍然需要CSSTransition标签。</p>
+<p>改写后的App.js:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./style.css&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CSSTransition, TransitionGroup &#125; <span class="keyword">from</span> <span class="string">&quot;react-transition-group&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.state = &#123;</span><br><span class="line">      list: [],</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">this</span>.handleAddItem = <span class="built_in">this</span>.handleAddItem.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="built_in">this</span>.handleAddItem&#125;&gt;toggle&lt;/button&gt;</span><br><span class="line">        &lt;TransitionGroup&gt;</span><br><span class="line">          &#123;<span class="built_in">this</span>.state.list.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">              &lt;CSSTransition</span><br><span class="line">                timeout=&#123;<span class="number">1000</span>&#125;</span><br><span class="line">                classNames=<span class="string">&quot;fade&quot;</span></span><br><span class="line">                unmountOnExit</span><br><span class="line">                appear=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">                key=&#123;index&#125;</span><br><span class="line">              &gt;</span><br><span class="line">                &lt;div&gt;&#123;item&#125;&lt;/div&gt;</span><br><span class="line">              &lt;/CSSTransition&gt;</span><br><span class="line">            );</span><br><span class="line">          &#125;)&#125;</span><br><span class="line">        &lt;/TransitionGroup&gt;</span><br><span class="line">      &lt;/Fragment&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleAddItem</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        list: [...prevState.list, <span class="string">&quot;item&quot;</span>],</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/04/06/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">前端——React的生命周期函数</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="twikoo-container">
+        <script 
+                src="//cdn.jsdelivr.net/npm/twikoo@1.0.0/dist/twikoo.all.min.js"
+        ></script>
+        <div id="twikoo-comment"></div>
+        <script >
+            function loadTwikoo() {
+                twikoo.init({
+                    el: '#twikoo-comment',
+                    envId: 'orlablog-6gs7djo1819bd3c8',
+                    region: '',
+                });
+            }
+
+            if ('false') {
+                const loadTwikooTimeout = setTimeout(() => {
+                    loadTwikoo();
+                    clearTimeout(loadTwikooTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadTwikoo);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Orla(CYY)</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8react-transition-group%E5%AE%9E%E7%8E%B0%E5%8A%A8%E7%94%BB"><span class="nav-number">1.</span> <span class="nav-text">使用react-transition-group实现动画</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E5%8A%A8%E7%94%BB"><span class="nav-number">1.1.</span> <span class="nav-text">单个元素的动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E5%8A%A8%E7%94%BB"><span class="nav-number">1.2.</span> <span class="nav-text">多个元素的动画</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+    <script src="/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="/js/left-side-toggle.js"></script><script src="/js/libs/anime.min.js"></script><script src="/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
