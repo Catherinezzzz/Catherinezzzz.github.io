@@ -9,7 +9,7 @@
     
     <title>
         
-            前端——React虚拟DOM中的diff算法 |
+            前端——React的生命周期函数 |
         
         Orla的随笔小记
     </title>
@@ -119,7 +119,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">前端——React虚拟DOM中的diff算法</span>
+            <span class="title-hover-animation">前端——React的生命周期函数</span>
         </div>
 
         
@@ -137,7 +137,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-04-01 10:04:30
+        <i class="fas fa-edit"></i>&nbsp;2021-04-06 14:53:28
     </span>
     
     
@@ -160,12 +160,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>751 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
         </span>
     
     
@@ -181,43 +181,45 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="虚拟DOM中的diff算法"><a href="#虚拟DOM中的diff算法" class="headerlink" title="虚拟DOM中的diff算法"></a>虚拟DOM中的diff算法</h1><p><a href="http://www.cyystudying.top/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/">上一篇文章</a>中提到了虚拟DOM的实现思想，可以分为以下7步：</p>
-<ol>
-<li>首先要定义好要显示的数据state；</li>
-<li>设定一个JSX模板，来容纳我们要显示数据；</li>
-<li>将数据和state和模板相结合，生成虚拟DOM（虚拟DOM就是一个JS对象，用它来描述真实DOM）；</li>
-<li>根据虚拟DOM的结构生成真实的DOM，将DOM挂载到页面上来显示；</li>
-<li>此时数据state发生变化；</li>
-<li>数据state和模板相结合，生成新的虚拟DOM；</li>
-<li><strong>比较原始虚拟DOM和新的虚拟DOM的区别，找到有区别的地方；</strong></li>
-<li>直接操作DOM，修改数据变动的部分。</li>
+            <h1 id="React的生命周期函数"><a href="#React的生命周期函数" class="headerlink" title="React的生命周期函数"></a>React的生命周期函数</h1><p>生命周期函数指的是在某一时刻组件会自动调用执行的函数。</p>
+<p><img src="https://i.loli.net/2021/03/26/CW3yY8KSF1naRUT.png" alt="React页面展示的周期.png"></p>
+<h2 id="各种生命周期函数"><a href="#各种生命周期函数" class="headerlink" title="各种生命周期函数"></a>各种生命周期函数</h2><h3 id="Initialization阶段"><a href="#Initialization阶段" class="headerlink" title="Initialization阶段"></a>Initialization阶段</h3><p>进行数据的设置（state, props），没有用到生命周期函数。</p>
+<h3 id="Mounting阶段"><a href="#Mounting阶段" class="headerlink" title="Mounting阶段"></a>Mounting阶段</h3><ol>
+<li><code>componentWillMount</code>: 在组件<strong>即将</strong>被挂载到页面的时刻自动执行。</li>
+<li><code>render</code>: 做页面的挂载。</li>
+<li><code>componentDidMount</code>: 在组件被挂载到页面<strong>之后</strong>自动执行。</li>
 </ol>
-<p>现在重点关注一下<strong>第7步</strong>。</p>
-<p>之前提到，虚拟DOM本质上是一个JS对象。现在要做的事情是两个虚拟DOM的比对，也就是两个JS对象的比对，这时需要思考一下，两个JS对象应该如何进行比对来寻找二者之间的差异？</p>
-<p>在React中，两个虚拟DOM进行比对采用的方式，就是<strong>diff算法</strong>。</p>
-<h2 id="diff算法"><a href="#diff算法" class="headerlink" title="diff算法"></a>diff算法</h2><p>根据上述虚拟DOM的实现思想可以知道，当数据发生变化的时候，虚拟DOM才会去做新的比对。那么什么时候才算数据发生了改变？</p>
-<p>当<code>state</code>或者<code>props</code>改变时，数据就发生了改变。<code>props</code>的改变也是因为父组件的<code>state</code>发生了改变，归根结底，数据发生变化都是因为调用了<code>setState()</code>方法。</p>
-<p><a href="http://www.cyystudying.top/2021/03/26/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E7%BB%84%E4%BB%B6%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">之前的文章</a>中提到过，<code>setState()</code>是异步执行的。<strong>之所以异步，是为了提升React底层的性能。</strong></p>
-<p>假设我们在很短的时间内连续调用三次<code>setState()</code>，即连续修改三次数据，React并不会进行三次虚拟DOM的比对，而是将三次<code>setState()</code>合并为一个<code>setState()</code>，只做一次虚拟DOM的比对，然后去更新一次DOM。这样的话，就可以省去两次虚拟DOM的比对带来的性能损耗。这就是<code>setState()</code>设为异步的初衷。</p>
-<p><img src="https://i.loli.net/2021/04/01/gJz9ZO238TpNcAE.png" alt="setState修改数据.png"></p>
-<p>diff算法可以简单理解为，在对两个虚拟DOM进行比较时找不同的算法。</p>
-<p>diff算法中有一个很重要的概念：<strong>同级比较</strong>。</p>
-<p><img src="https://i.loli.net/2021/04/01/uOSN41Wj8Bz2pDF.png" alt="diff算法同级比较.png"></p>
-<p>这张图中左边的树代表原始的虚拟DOM，右侧的树代表新生成的虚拟DOM。我们现在要用diff算法来比对这两棵树，找到差异之后去更新真实的DOM。</p>
-<p>diff算法会怎么进行比对呢？同层比对。</p>
-<p>首先，会比较最顶层的虚拟DOM结点（图中红框部分），看这两个结点是否一致。假设这一层的两个结点一致，再去比较下一层，也就是第二层（图中紫框部分）。</p>
-<p><strong>如果顶层的两个结点不一致</strong>，那么React就不会继续往下层比较了。React在发现第一层DOM存在差异之后，会把原始页面上的虚拟DOM对应的所有结点的DOM全部删除，重新生成所有DOM，然后用重新生成的DOM替换原始页面上的DOM。</p>
-<p>这样一来，如果在第一层就发现了差异，那么就会重新渲染整个DOM，这看起来性能比较低。</p>
-<p>事实上也确实如此，但是这样进行同层比对，带来的好处就是，比对的算法非常简单，只需要一层一层做对比即可。算法简单就会使得比对的速度很快，所以，虽然可能会造成DOM上重新渲染的性能浪费，但是会大大减少两个虚拟DOM进行比对的算法的性能消耗。</p>
-<h2 id="key值的引入"><a href="#key值的引入" class="headerlink" title="key值的引入"></a>key值的引入</h2><p><img src="https://i.loli.net/2021/04/01/2Q46SMjzAlemH51.png" alt="diff算法中key值的引入.png"></p>
-<p>假设现在有一个数组，数组中包含五个数据。在页面第一次渲染的时候，会把这五个数据映射成五个虚拟DOM结点，生成一个小的虚拟DOM树。</p>
-<p>现在，往数组里增加了一项内容（左图蓝色结点），于是，数据发生了变化，生成一个新的虚拟DOM树，然后将两个虚拟DOM进行比对（分别对应左图中上下两排结点），如果每一个虚拟DOM结点没有一个key值的话，每个结点都没有自己的名字。当我们进行比对的时候，结点和结点之间的关系就很难被确立。</p>
-<p>假如在进行虚拟DOM的比对时，可以给每一个虚拟DOM结点起一个名字，那么比较起来就方便多了（如右图）。虚拟DOM的比对可以根据key值做关联，如果原先DOM结点和新的DOM结点的key值一致，那么这个结点就可以复用。那么，只要把新的虚拟DOM树中和原来虚拟DOM树中key值不相同的结点进行相应的修改就可以了。这样的话，就极大地提高了虚拟DOM比对的性能。</p>
-<p>这样做的话，需要一个前提。<strong>原本的虚拟DOM树中的结点，在新的虚拟DOM树中的key值不能改变。</strong>所以需要使用一个稳定的值作为key值。不稳定的值，比如数组中的index，如果数组中的某一数据被删除，数据对应的索引值也会发生改变，index就是不稳定的值。</p>
-<p><strong>小结</strong>：</p>
-<p>React中的setState()的性能优化：可以将多次setState()合并为一次setState()，然后进行虚拟DOM的比对。</p>
-<p>diff算法在比对两个虚拟DOM时采用逐层比对的策略，一旦有差异，下面的层便不会再进行比对，直接废弃掉，用新的虚拟DOM替换掉原先的虚拟DOM即可。</p>
-<p>React在进行列表循环时引入key值，是为了提高虚拟DOM比对时的性能。key值要保持稳定。不要采用index作为key值。</p>
+<h3 id="Updation阶段"><a href="#Updation阶段" class="headerlink" title="Updation阶段"></a>Updation阶段</h3><p>只在数据发生变化时进入这个阶段。在组件更新的过程中(props或state发生变化)，会涉及一些新的生命周期函数。</p>
+<p>props和state发生变化时，执行的生命周期函数略有不同（props多了一个componentWillReceiveProps）。</p>
+<p>先来看相同的部分：</p>
+<ol>
+<li><code>shouldComponentUpdate</code>: 组件更新之前会被自动执行。该函数要求返回一个布尔值。true代表需要更新，false代表不更新。</li>
+<li><code>componentWillUpdate</code>: 组件被更新之前自动执行，在shouldComponentUpdate之后被执行。如果shouldComponentUpdate返回true才会执行；如果返回false则不会执行。</li>
+<li><code>render</code></li>
+<li><code>componentDidUpdate</code>: 组件更新完成之后会被执行。</li>
+</ol>
+<p>接下来是props改变时独有的生命周期函数componentWillReceiveProps。</p>
+<p>如果一个组件没有接收props参数（比如顶层组件），componentWillReceiveProps这个生命周期函数是不会被执行的。</p>
+<p><code>componentWillReceiveProps</code>: 当一个组件从父组件接收参数，如果这个组件<strong>第一次</strong>存在于父组件中，不会被执行；如果这个组件之前<strong>已经存在于父组件中</strong>，才会执行。</p>
+<h3 id="Unmounting阶段"><a href="#Unmounting阶段" class="headerlink" title="Unmounting阶段"></a>Unmounting阶段</h3><p><code>componentWillUnmount</code>: 当前组件即将被从页面中剔除的时候会被执行。</p>
+<h2 id="生命周期函数使用场景"><a href="#生命周期函数使用场景" class="headerlink" title="生命周期函数使用场景"></a>生命周期函数使用场景</h2><h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><p>当父组件中的数据发生改变，render函数就会执行。父组件的render函数执行，子组件的render函数也会执行。如果父组件的数据改变了，但是并不想让子组件重新渲染，就可以使用生命周期函数来进行性能上的优化。</p>
+<p>利用<code>shouldComponentUpdate</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">shouldComponentUpdate</span>(<span class="params">nextProps, nextState</span>)</span> &#123;</span><br><span class="line">  <span class="comment">// nextProps: 组件更新时，接下来props会变化为什么样</span></span><br><span class="line">  <span class="comment">// nextState: 组件更新时，接下来state会变化为什么样</span></span><br><span class="line">  <span class="comment">// content是自定义的属性名</span></span><br><span class="line">  <span class="keyword">if</span> (nextProps.content !== <span class="built_in">this</span>.props.content) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送Ajax请求"><a href="#发送Ajax请求" class="headerlink" title="发送Ajax请求"></a>发送Ajax请求</h3><p>在<code>componentDidMount</code>中发送Ajax请求。</p>
+<p>如果将Ajax请求放到render中，render函数会在数据改变时执行，这样会多次发送Ajax请求。应该寻找只会执行一次的生命周期函数，在其中发送一次Ajax请求即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  axios</span><br><span class="line">    .get(<span class="string">&quot;/api/todolist&quot;</span>)</span><br><span class="line">    .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在React中使用Ajax需要安装axios。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install axios</span><br></pre></td></tr></table></figure>
+
+<p>然后在组件中引入axios</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>接着便可以发送Ajax请求来获取数据了</p>
+<p>一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  axios</span><br><span class="line">    .get(</span><br><span class="line">      <span class="string">&quot;https://www.fastmock.site/mock/0775a4a75216a7011e70b328b9dce604/todolist/todolist&quot;</span></span><br><span class="line">    )</span><br><span class="line">    .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.setState(<span class="function">() =&gt;</span> (&#123; <span class="attr">list</span>: [...res.data] &#125;));</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
 
@@ -226,29 +228,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/04/06/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——React的生命周期函数</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/"
+                           href="/2021/04/01/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E8%99%9A%E6%8B%9FDOM%E4%B8%AD%E7%9A%84diff%E7%AE%97%E6%B3%95/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——React中的虚拟DOM</span>
+                                <span class="post-nav-title-item">前端——React虚拟DOM中的diff算法</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -418,7 +405,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E6%8B%9FDOM%E4%B8%AD%E7%9A%84diff%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">虚拟DOM中的diff算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#diff%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">diff算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#key%E5%80%BC%E7%9A%84%E5%BC%95%E5%85%A5"><span class="nav-number">1.2.</span> <span class="nav-text">key值的引入</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">React的生命周期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">各种生命周期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initialization%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">Initialization阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mounting%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.2.</span> <span class="nav-text">Mounting阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Updation%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.3.</span> <span class="nav-text">Updation阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unmounting%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.4.</span> <span class="nav-text">Unmounting阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">生命周期函数使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81Ajax%E8%AF%B7%E6%B1%82"><span class="nav-number">1.2.2.</span> <span class="nav-text">发送Ajax请求</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
