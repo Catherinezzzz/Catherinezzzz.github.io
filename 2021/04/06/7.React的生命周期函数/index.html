@@ -9,7 +9,7 @@
     
     <title>
         
-            前端——React中的PropTypes与DefaultProps |
+            React的生命周期函数 |
         
         Orla的随笔小记
     </title>
@@ -119,7 +119,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">前端——React中的PropTypes与DefaultProps</span>
+            <span class="title-hover-animation">React的生命周期函数</span>
         </div>
 
         
@@ -137,7 +137,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-03-31 13:19:27
+        <i class="fas fa-edit"></i>&nbsp;2021-04-06 14:53:28
     </span>
     
     
@@ -160,12 +160,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>748 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>751 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
         </span>
     
     
@@ -181,34 +181,45 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="React中的PropTypes与DefaultProps"><a href="#React中的PropTypes与DefaultProps" class="headerlink" title="React中的PropTypes与DefaultProps"></a>React中的PropTypes与DefaultProps</h1><h2 id="PropTypes"><a href="#PropTypes" class="headerlink" title="PropTypes"></a>PropTypes</h2><p>使用propTypes可以实现子组件属性接收的强校验。即子组件接收的属性的类型应该是固定的，父组件不能随便传值。</p>
-<p>回到之前的子组件TodoItem中。</p>
-<p>想要使用PropTypes，首先要引入<code>PropTypes</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">&quot;prop-types&quot;</span>;</span><br></pre></td></tr></table></figure>
+            <h1 id="React的生命周期函数"><a href="#React的生命周期函数" class="headerlink" title="React的生命周期函数"></a>React的生命周期函数</h1><p>生命周期函数指的是在某一时刻组件会自动调用执行的函数。</p>
+<p><img src="https://i.loli.net/2021/03/26/CW3yY8KSF1naRUT.png" alt="React页面展示的周期.png"></p>
+<h2 id="各种生命周期函数"><a href="#各种生命周期函数" class="headerlink" title="各种生命周期函数"></a>各种生命周期函数</h2><h3 id="Initialization阶段"><a href="#Initialization阶段" class="headerlink" title="Initialization阶段"></a>Initialization阶段</h3><p>进行数据的设置（state, props），没有用到生命周期函数。</p>
+<h3 id="Mounting阶段"><a href="#Mounting阶段" class="headerlink" title="Mounting阶段"></a>Mounting阶段</h3><ol>
+<li><code>componentWillMount</code>: 在组件<strong>即将</strong>被挂载到页面的时刻自动执行。</li>
+<li><code>render</code>: 做页面的挂载。</li>
+<li><code>componentDidMount</code>: 在组件被挂载到页面<strong>之后</strong>自动执行。</li>
+</ol>
+<h3 id="Updation阶段"><a href="#Updation阶段" class="headerlink" title="Updation阶段"></a>Updation阶段</h3><p>只在数据发生变化时进入这个阶段。在组件更新的过程中(props或state发生变化)，会涉及一些新的生命周期函数。</p>
+<p>props和state发生变化时，执行的生命周期函数略有不同（props多了一个componentWillReceiveProps）。</p>
+<p>先来看相同的部分：</p>
+<ol>
+<li><code>shouldComponentUpdate</code>: 组件更新之前会被自动执行。该函数要求返回一个布尔值。true代表需要更新，false代表不更新。</li>
+<li><code>componentWillUpdate</code>: 组件被更新之前自动执行，在shouldComponentUpdate之后被执行。如果shouldComponentUpdate返回true才会执行；如果返回false则不会执行。</li>
+<li><code>render</code></li>
+<li><code>componentDidUpdate</code>: 组件更新完成之后会被执行。</li>
+</ol>
+<p>接下来是props改变时独有的生命周期函数componentWillReceiveProps。</p>
+<p>如果一个组件没有接收props参数（比如顶层组件），componentWillReceiveProps这个生命周期函数是不会被执行的。</p>
+<p><code>componentWillReceiveProps</code>: 当一个组件从父组件接收参数，如果这个组件<strong>第一次</strong>存在于父组件中，不会被执行；如果这个组件之前<strong>已经存在于父组件中</strong>，才会执行。</p>
+<h3 id="Unmounting阶段"><a href="#Unmounting阶段" class="headerlink" title="Unmounting阶段"></a>Unmounting阶段</h3><p><code>componentWillUnmount</code>: 当前组件即将被从页面中剔除的时候会被执行。</p>
+<h2 id="生命周期函数使用场景"><a href="#生命周期函数使用场景" class="headerlink" title="生命周期函数使用场景"></a>生命周期函数使用场景</h2><h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><p>当父组件中的数据发生改变，render函数就会执行。父组件的render函数执行，子组件的render函数也会执行。如果父组件的数据改变了，但是并不想让子组件重新渲染，就可以使用生命周期函数来进行性能上的优化。</p>
+<p>利用<code>shouldComponentUpdate</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">shouldComponentUpdate</span>(<span class="params">nextProps, nextState</span>)</span> &#123;</span><br><span class="line">  <span class="comment">// nextProps: 组件更新时，接下来props会变化为什么样</span></span><br><span class="line">  <span class="comment">// nextState: 组件更新时，接下来state会变化为什么样</span></span><br><span class="line">  <span class="comment">// content是自定义的属性名</span></span><br><span class="line">  <span class="keyword">if</span> (nextProps.content !== <span class="built_in">this</span>.props.content) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在TodoItem中以对象的形式添加属性强校验，添加到文件底部。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 属性强校验</span></span><br><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  <span class="comment">// content的类型必须是string类型</span></span><br><span class="line">  content: PropTypes.string,</span><br><span class="line">  <span class="comment">// index的类型必须是number</span></span><br><span class="line">  index: PropTypes.number,</span><br><span class="line">  <span class="comment">// delFunction的类型必须是function</span></span><br><span class="line">  delFunction: PropTypes.func,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="发送Ajax请求"><a href="#发送Ajax请求" class="headerlink" title="发送Ajax请求"></a>发送Ajax请求</h3><p>在<code>componentDidMount</code>中发送Ajax请求。</p>
+<p>如果将Ajax请求放到render中，render函数会在数据改变时执行，这样会多次发送Ajax请求。应该寻找只会执行一次的生命周期函数，在其中发送一次Ajax请求即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  axios</span><br><span class="line">    .get(<span class="string">&quot;/api/todolist&quot;</span>)</span><br><span class="line">    .then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>如果传值类型不匹配，控制台会给出警告，警告不会阻止程序继续执行，但是会给出一个明显的提示。将<code>content</code>的类型设为number，会报以下警告。</p>
-<p><img src="https://i.loli.net/2021/03/31/ElVHXBAv57JUOQp.png" alt="propTypes类型不匹配.png"></p>
-<p>建议在开发过程中将<code>PropTypes</code>写上，这样一旦在传值过程中，有值传递错误时，会给出一些明显的提示。</p>
-<p>如果某个属性值并没有传值，则不会执行校验，设置PropTypes不会生效。</p>
-<p>如果要求必须给属性传值并且校验类型的话，要使用<code>isRequired</code></p>
-<p>现在在子组件TodoItem中添加一个<code>test</code>属性，父组件中并没有这个属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">&quot;prop-types&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.handleItemClick = <span class="built_in">this</span>.handleItemClick.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">handleItemClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; delFunction, index &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    delFunction(index);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 这里添加一个test属性，父组件并未传递这个属性</span></span><br><span class="line">    <span class="keyword">const</span> &#123; content, test &#125; = <span class="built_in">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;li onClick=&#123;<span class="built_in">this</span>.handleItemClick&#125; key=&#123;<span class="built_in">this</span>.props.index&#125;&gt;</span><br><span class="line">        &#123;content&#125; - &#123;test&#125;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 属性强校验</span></span><br><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  content: PropTypes.string,</span><br><span class="line">  index: PropTypes.number,</span><br><span class="line">  delFunction: PropTypes.func,</span><br><span class="line">  <span class="comment">// 添加isRequired，要求这个属性值必须传递并且进行校验</span></span><br><span class="line">  test: PropTypes.string.isRequired,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoItem;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在React中使用Ajax需要安装axios。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install axios</span><br></pre></td></tr></table></figure>
 
-<p>因为父组件并没有传递<code>test</code>这个属性，所以控制台会报一个警告。</p>
-<p><img src="https://i.loli.net/2021/03/31/t8E53eGQznUqiWZ.png" alt="isRequired.png"></p>
-<p>PropTypes除了单一的类型，还可以有其他的写法。比如</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  <span class="comment">// content的类型必须是数组，数组中的值应该为string或number类型</span></span><br><span class="line">  content: PropTypes.arrayOf(PropTypes.string, PropTypes.number),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>然后在组件中引入axios</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&quot;axios&quot;</span>;</span><br></pre></td></tr></table></figure>
 
-<p>其他写法可以详见<a class="link"   target="_blank" rel="noopener" href="https://reactjs.org/docs/typechecking-with-proptypes.html" >官网文档<i class="fas fa-external-link-alt"></i></a></p>
-<h2 id="DefaultProps"><a href="#DefaultProps" class="headerlink" title="DefaultProps"></a>DefaultProps</h2><p>有时候父组件确实无法给某个属性传值，但是子组件中又要求这个属性必须有值，这时候就需要用到<code>DefaultProps</code>。</p>
-<p>同样要在子组件中以对象的形式进行定义。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 属性强校验</span></span><br><span class="line">TodoItem.propTypes = &#123;</span><br><span class="line">  content: PropTypes.string,</span><br><span class="line">  index: PropTypes.number,</span><br><span class="line">  delFunction: PropTypes.func,</span><br><span class="line">  <span class="comment">// 添加isRequired，要求这个属性值必须传递并且进行校验</span></span><br><span class="line">  test: PropTypes.string.isRequired,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认值</span></span><br><span class="line">TodoItem.defaultProps = &#123;</span><br><span class="line">  test: <span class="string">&quot;hello world&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>接着便可以发送Ajax请求来获取数据了</p>
+<p>一个示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  axios</span><br><span class="line">    .get(</span><br><span class="line">      <span class="string">&quot;https://www.fastmock.site/mock/0775a4a75216a7011e70b328b9dce604/todolist/todolist&quot;</span></span><br><span class="line">    )</span><br><span class="line">    .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.setState(<span class="function">() =&gt;</span> (&#123; <span class="attr">list</span>: [...res.data] &#125;));</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>以上代码表示，父组件需要给子组件传递一个<code>test</code>，类型为string，而且是必填的。如果父组件没有传这个<code>test</code>，则会给<code>test</code>一个默认值，这个默认值为hello world。这时，即使父组件没有向子组件传递<code>test</code>也没有关系，因为我们定义了默认值。</p>
-<p><img src="https://i.loli.net/2021/03/31/B6GT8i7NySkRHUr.gif" alt="PropTypes和DefaultProps.gif"></p>
 
         </div>
 
@@ -220,13 +231,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94React%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9FDOM/"
+                           href="/2021/04/06/8.%E4%BD%BF%E7%94%A8react-transition-group%E5%AE%9E%E7%8E%B0%E5%8A%A8%E7%94%BB/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——React中的虚拟DOM</span>
+                                <span class="post-nav-title-item">使用react-transition-group实现动画</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -236,10 +247,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/03/31/%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E5%9B%B4%E7%BB%95React%E8%A1%8D%E7%94%9F%E5%87%BA%E7%9A%84%E6%80%9D%E8%80%83/"
+                           href="/2021/04/01/4.React%E8%99%9A%E6%8B%9FDOM%E4%B8%AD%E7%9A%84diff%E7%AE%97%E6%B3%95/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">前端——围绕React衍生出的思考</span>
+                                <span class="post-nav-title-item">React虚拟DOM中的diff算法</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -409,7 +420,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E4%B8%AD%E7%9A%84PropTypes%E4%B8%8EDefaultProps"><span class="nav-number">1.</span> <span class="nav-text">React中的PropTypes与DefaultProps</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PropTypes"><span class="nav-number">1.1.</span> <span class="nav-text">PropTypes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DefaultProps"><span class="nav-number">1.2.</span> <span class="nav-text">DefaultProps</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">React的生命周期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">各种生命周期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initialization%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">Initialization阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mounting%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.2.</span> <span class="nav-text">Mounting阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Updation%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.3.</span> <span class="nav-text">Updation阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unmounting%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.4.</span> <span class="nav-text">Unmounting阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">生命周期函数使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81Ajax%E8%AF%B7%E6%B1%82"><span class="nav-number">1.2.2.</span> <span class="nav-text">发送Ajax请求</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
