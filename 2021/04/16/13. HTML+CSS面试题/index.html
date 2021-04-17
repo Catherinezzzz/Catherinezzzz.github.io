@@ -268,7 +268,7 @@
 
 <p>圣杯布局和双飞翼布局的对比：</p>
 <ul>
-<li>圣杯布局是用过padding来为左右留白；而双飞翼布局是用过margin来为左右留白；</li>
+<li>圣杯布局是通过padding来为左右留白；而双飞翼布局是通过margin来为左右留白；</li>
 <li>圣杯布局中，left的内容使用了<code>position: reletive;</code>和<code>right: 200px;</code>，双飞翼布局没有用到相对定位，复杂度更加低一些；</li>
 <li>圣杯布局中right部分使用的是<code>margin-right</code>，双飞翼布局中使用的是<code>margin-left</code>。二者相比，<code>margin-left</code>要更容易理解一些；</li>
 <li>总的来说，双飞翼布局复杂度更低，理解起来更容易。</li>
@@ -299,7 +299,7 @@
 </ol>
 <h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><ol>
 <li><p><strong>absolute和relative分别依据什么定位？</strong></p>
-<p>relative依据自身定位；relative依据最近一层的定位元素定位（父元素一层一层往上找），定位元素包括：position属性为absolute, relative, fixed的元素以及<code>&lt;body&gt;</code>标签</p>
+<p>relative依据自身定位；absolute依据最近一层的定位元素定位（父元素一层一层往上找），定位元素包括：position属性为absolute, relative, fixed的元素以及<code>&lt;body&gt;</code>标签</p>
 </li>
 <li><p><strong>居中对齐有哪些实现方式？</strong></p>
 <p>居中对齐分为水平居中和垂直居中。</p>
