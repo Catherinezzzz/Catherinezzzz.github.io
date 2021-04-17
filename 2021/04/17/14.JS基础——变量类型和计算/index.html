@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Orla(CYY)">
+    
+    <title>
+        
+            JS基础——变量类型和计算 |
+        
+        Orla的随笔小记
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"www.cyystudying.top","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/profile.jpg","favicon":"/images/logo.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Orla的随笔小记
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">JS基础——变量类型和计算</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/profile.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Orla(CYY)</span>
+                        
+                            <span class="author-label">Lv3</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-04-17 15:17:36
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>先从几道题目引入。</p>
+<h2 id="题目-答案在最后一节"><a href="#题目-答案在最后一节" class="headerlink" title="题目(答案在最后一节)"></a>题目(答案在最后一节)</h2><ol>
+<li><strong>typeof能判断哪些类型？</strong></li>
+<li><strong>何时使用<code>===</code>？何时使用<code>==</code>？</strong></li>
+<li><strong>值类型和引用类型的区别？</strong></li>
+<li><strong>手写深拷贝（涉及递归）</strong></li>
+</ol>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li><p>变量类型</p>
+</li>
+<li><p>变量计算</p>
+</li>
+</ol>
+<h3 id="变量类型相关知识点"><a href="#变量类型相关知识点" class="headerlink" title="变量类型相关知识点"></a>变量类型相关知识点</h3><ul>
+<li>值类型vs引用类型</li>
+<li>typeof运算符</li>
+<li>深拷贝</li>
+</ul>
+<h4 id="1-值类型vs引用类型"><a href="#1-值类型vs引用类型" class="headerlink" title="1. 值类型vs引用类型"></a>1. 值类型vs引用类型</h4><img src="https://i.loli.net/2021/04/17/oluL7IAfyHFERpO.png" alt="值类型.png" style="zoom:50%;" />
+
+<img src="https://i.loli.net/2021/04/17/iYOFrtje9nkpWzU.png" alt="引用类型.png" style="zoom:50%;" />
+
+<p>​    深入分析：</p>
+<p>​    值类型都是在<strong>栈</strong>中存储的。</p>
+<p><img src="https://i.loli.net/2021/04/17/OEmv5BdulW8ZJo7.png" alt="值类型——栈.png"></p>
+<p>​    引用类型的值会存储在<strong>堆</strong>中。</p>
+<p>​    图中代码把<code>a</code>赋值为<code>age=20</code>的一个对象，这样会在堆中申请一个地址，然后把<code>age=20</code>放在堆中，把对应的key值存为这个内存地址，然后让变量<code>a</code>指向这个内存地址。<strong>也就是说，此时变量a中存储的并不是<code>&#123;age: 20&#125;</code>这个对象，而是一个内存地址，这个地址指向<code>&#123;age: 20&#125;</code>这个对象。</strong>紧接着，把<code>b</code>赋值为<code>a</code>，其实就是把地址赋值给了<code>b</code>。此时<code>a</code>和<code>b</code>指向了同一个内存地址，也就是指向了同一个对象。</p>
+<p><img src="https://i.loli.net/2021/04/17/fGqSeBJkmWHoN6w.png" alt="值类型——堆.png"></p>
+<ul>
+<li><p>常见值类型：undefined, string, number, boolean, symbol</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见值类型</span></span><br><span class="line"><span class="keyword">let</span> a; <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;abc&quot;</span>; <span class="comment">// string</span></span><br><span class="line"><span class="keyword">const</span> n = <span class="number">100</span>; <span class="comment">// number</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="literal">true</span>; <span class="comment">// boolean</span></span><br><span class="line"><span class="keyword">const</span> s = <span class="built_in">Symbol</span>(<span class="string">&quot;s&quot;</span>); <span class="comment">//symbol</span></span><br></pre></td></tr></table></figure></li>
+<li><p>常见引用类型：对象，数组，null（特殊引用类型，指针指向为空地址），函数（特殊引用类型，但不用于数据存储，没有复制、拷贝一说）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见引用类型</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">x</span>: <span class="number">100</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>];</span><br><span class="line"><span class="keyword">const</span> n = <span class="literal">null</span>; <span class="comment">// 特殊引用类型，指针指向为空地址</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">// 特殊引用类型，但不用于存储数据，所以没有“拷贝”、“复制”一说</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-typeof运算符"><a href="#2-typeof运算符" class="headerlink" title="2. typeof运算符"></a>2. typeof运算符</h4><p>typeof能用来做什么：</p>
+<ul>
+<li>识别所有值类型</li>
+<li>识别函数</li>
+<li>判断是否是引用类型（不可再细分）</li>
+</ul>
+<img src="https://i.loli.net/2021/04/17/TRJSz28qI5N94oL.png" alt="typeof值类型.png" style="zoom:50%;" />
+
+<img src="https://i.loli.net/2021/04/17/m7EcoirRjuN1BXH.png" alt="typeof引用类型.png" style="zoom:50%;" />
+
+<h4 id="3-手写深拷贝"><a href="#3-手写深拷贝" class="headerlink" title="3. 手写深拷贝"></a>3. 手写深拷贝</h4><p>先来看浅拷贝：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 浅拷贝</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">  age: <span class="number">20</span>,</span><br><span class="line">  name: <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">  address: &#123;</span><br><span class="line">    city: <span class="string">&quot;beijing&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  skill: [<span class="string">&quot;html&quot;</span>, <span class="string">&quot;css&quot;</span>, <span class="string">&quot;javascript&quot;</span>],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj2 = obj1;</span><br><span class="line">obj2.address.city = <span class="string">&quot;shanghai&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br></pre></td></tr></table></figure>
+
+<p>以下是<strong>深拷贝</strong>：（⭐⭐⭐⭐⭐要会默写）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 深拷贝</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;*&#125;</span> </span>obj 要拷贝的对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns </span>result 拷贝后的结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 首先排除不是对象或者数组的情况</span></span><br><span class="line">  <span class="comment">// obj是null，或不是对象或者数组，直接返回</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&quot;object&quot;</span> || obj == <span class="literal">null</span>) <span class="keyword">return</span> obj;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化返回结果</span></span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">    result = [];</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    result = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="comment">// 保证key不是原型的属性</span></span><br><span class="line">    <span class="keyword">if</span> (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">      <span class="comment">// 递归调用</span></span><br><span class="line">      result[key] = deepClone(obj[key]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="变量计算相关知识点"><a href="#变量计算相关知识点" class="headerlink" title="变量计算相关知识点"></a>变量计算相关知识点</h3><ul>
+<li>类型转换</li>
+</ul>
+<h4 id="类型转换（这里有坑）"><a href="#类型转换（这里有坑）" class="headerlink" title="类型转换（这里有坑）"></a>类型转换（这里有坑）</h4><p>以下场景发生类型转换较多：</p>
+<ul>
+<li>字符串拼接</li>
+<li>==</li>
+<li>if语句和逻辑运算</li>
+</ul>
+<img src="https://i.loli.net/2021/04/17/jYpKCuadbrxXOPI.png" alt="变量计算——类型转换.png" style="zoom:50%;" />
+
+<img src="https://i.loli.net/2021/04/17/cWFZUsROYQBAz9y.png" alt="变量计算——类型转换之__.png" style="zoom:50%;" />
+
+
+
+<p>知识点：</p>
+<ul>
+<li><p>除了<code>==null</code>之外，其他一律都用<code>===</code></p>
+<img src="https://i.loli.net/2021/04/17/LN9jC31YTsWa2gP.png" alt="___还是__.png" style="zoom:50%;" /></li>
+<li><p>truly变量和falsely变量</p>
+<ul>
+<li>truly变量： <code>!!a === true</code>的变量</li>
+<li>falsely变量：<code>!!a === false</code>的变量</li>
+</ul>
+<img src="https://i.loli.net/2021/04/17/NVJiA9UKOzHEI4u.png" alt="truly变量和falsely变量.png" style="zoom: 67%;" /></li>
+<li><p>在if语句中判断的就是truly变量和falsely变量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// truly变量</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span> (a) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;a是truly变量&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> b = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">if</span> (b) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;b是truly变量&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// falsely变量</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (c) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;这个if无法执行&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">const</span> d = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">if</span> (d) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;这个if无法执行&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">let</span> e;</span><br><span class="line"><span class="keyword">if</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;这个if无法执行&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>逻辑运算同理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">10</span> &amp;&amp; <span class="number">0</span>); <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;&quot;</span> || <span class="string">&quot;abc&quot;</span>); <span class="comment">//&#x27;abc&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(!<span class="built_in">window</span>.abc); <span class="comment">// true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第一节题目答案"><a href="#第一节题目答案" class="headerlink" title="第一节题目答案"></a>第一节题目答案</h2><ol>
+<li><p><strong>typeof能判断哪些类型？</strong></p>
+<ul>
+<li>识别所有值类型</li>
+<li>识别函数</li>
+<li>判断是否是引用类型（不可再细分）</li>
+</ul>
+</li>
+<li><p><strong>何时使用<code>===</code>？何时使用<code>==</code>？</strong></p>
+<p><code>==</code>会隐式地做类型转换，让两个值尝试相等。</p>
+<p>一般情况下，除了<code>==null</code>之外，其他一律都用<code>===</code></p>
+</li>
+<li><p><strong>值类型和引用类型的区别？</strong></p>
+<p>在内存中，值类型存在栈中，引用类型存在堆中。复制的时候，值类型直接复制，引用类型复制的是地址。</p>
+<img src="https://i.loli.net/2021/04/17/n7yjQPZHN5gJt8k.png" alt="引用类型和值类型例题.png" style="zoom:67%;" /></li>
+<li><p><strong>手写深拷贝（涉及递归）</strong></p>
+<ul>
+<li>注意点：<ul>
+<li>注意判断值类型和引用类型</li>
+<li>注意判断是数组还是对象</li>
+<li>递归</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 深拷贝</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;*&#125;</span> </span>obj 要拷贝的对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns </span>result 拷贝后的结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 首先排除不是对象或者数组的情况</span></span><br><span class="line">  <span class="comment">// obj是null，或不是对象或者数组，直接返回</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&quot;object&quot;</span> || obj == <span class="literal">null</span>) <span class="keyword">return</span> obj;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化返回结果</span></span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">    result = [];</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    result = &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="comment">// 保证key不是原型的属性</span></span><br><span class="line">    <span class="keyword">if</span> (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">      <span class="comment">// 递归调用</span></span><br><span class="line">      result[key] = deepClone(obj[key]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/04/16/13.%20HTML+CSS%E9%9D%A2%E8%AF%95%E9%A2%98/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">HTML+CSS面试题</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="twikoo-container">
+        <script 
+                src="//cdn.jsdelivr.net/npm/twikoo@1.0.0/dist/twikoo.all.min.js"
+        ></script>
+        <div id="twikoo-comment"></div>
+        <script >
+            function loadTwikoo() {
+                twikoo.init({
+                    el: '#twikoo-comment',
+                    envId: 'orlablog-6gs7djo1819bd3c8',
+                    region: '',
+                });
+            }
+
+            if ('false') {
+                const loadTwikooTimeout = setTimeout(() => {
+                    loadTwikoo();
+                    clearTimeout(loadTwikooTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadTwikoo);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Orla(CYY)</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-%E7%AD%94%E6%A1%88%E5%9C%A8%E6%9C%80%E5%90%8E%E4%B8%80%E8%8A%82"><span class="nav-number">1.</span> <span class="nav-text">题目(答案在最后一节)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">变量类型相关知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%80%BC%E7%B1%BB%E5%9E%8Bvs%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 值类型vs引用类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-typeof%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. typeof运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%89%8B%E5%86%99%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. 手写深拷贝</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">变量计算相关知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E8%BF%99%E9%87%8C%E6%9C%89%E5%9D%91%EF%BC%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">类型转换（这里有坑）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%E9%A2%98%E7%9B%AE%E7%AD%94%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">第一节题目答案</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+    <script src="/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts">
+    
+        <script src="/js/left-side-toggle.js"></script><script src="/js/libs/anime.min.js"></script><script src="/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
